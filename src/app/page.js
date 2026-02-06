@@ -1,66 +1,84 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import Navbar from "@/components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/redux/slices/authSlice";
+import { httpPost } from "@/services/api";
+import { toast } from "react-toastify";
+import { setMenu } from "@/redux/slices/menuSlice";
+import { useEffect, useState } from "react";
+import HorizontalMenuCategory from "@/components/HorizontalMenuCategory";
+import ItemCard from "@/components/ItemCard";
+import { Button } from "react-bootstrap";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const menu = useSelector((state) => state.menu?.menu);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const onCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleSubmit = async () => {
+    const res = await httpPost("/menu");
+    // console.log("API RES 👉", res);
+    if (!res.error) {
+      dispatch(setMenu(res.data));
+    } else {
+      toast.error(res.message || "Something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    if (menu?.length > 0) return; // Agar menu already loaded hai to API call mat karo{
+    handleSubmit();
+  }, []);
+
+  let filteredMenu =
+    selectedCategory !== ""
+      ? menu.filter((item) => item.category === selectedCategory)
+      : menu;
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <Navbar />
+      {/* https://www.pexels.com/video/a-person-serving-food-5657164/ */}
+      <div
+        className="w-100 "
+        style={{ maxHeight: "400px", overflow: "hidden", borderRadius: "12px" }}
+      >
+        <video
+          src="/videos/food.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-100"
+          style={{ objectFit: "cover", maxHeight: "400px" }}
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </div>
+
+      <div className="container mt-2">
+        <div className="mb-4">
+          <h2 className="mb-3">🍽️ Explore Menu</h2>
+          {menu?.length > 0 && (
+            <HorizontalMenuCategory
+              data={menu}
+              onCategorySelect={onCategorySelect}
+              selectedCategory={selectedCategory}
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          )}
         </div>
-      </main>
-    </div>
+
+        {selectedCategory && (
+          <div className="mb-3">
+            <p className="text-muted">
+              Showing items from <strong>{selectedCategory}</strong>
+            </p>
+          </div>
+        )}
+
+        <ItemCard data={filteredMenu} onMenuItemSelect={onCategorySelect} />
+      </div>
+    </>
   );
 }

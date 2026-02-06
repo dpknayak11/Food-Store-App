@@ -1,0 +1,647 @@
+/* ============================================
+   COLOR SCHEME - Zomato Inspired
+   ============================================ */
+:root {
+  --zomato-red: #E74C3C;
+  --zomato-dark-red: #C0392B;
+  --zomato-light: #FEF5F5;
+  --zomato-light-gray: #F5F5F5;
+  --zomato-text-dark: #1C1C1C;
+  --zomato-text-muted: #696969;
+  --zomato-border-light: #E8E8E8;
+  --zomato-yellow: #FFB800;
+  --primary-color: #E74C3C;
+  --secondary-color: #2C3E50;
+  --success-color: #27AE60;
+  --light-bg: #FFFFFF;
+  --dark-bg: #0A0A0A;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 14px;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--light-bg);
+  color: var(--zomato-text-dark);
+}
+
+body {
+  background: linear-gradient(to bottom, #FFFFFF, #FEF5F5);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--zomato-text-dark);
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.1rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  color: var(--zomato-text-muted);
+  line-height: 1.6;
+}
+
+/* ============================================
+   NAVBAR STYLING
+   ============================================ */
+.navbar {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FEF5F5 100%) !important;
+  border-bottom: 1px solid var(--zomato-border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 0.75rem 0;
+  transition: var(--transition-smooth);
+}
+
+.navbar:hover {
+  box-shadow: 0 3px 12px rgba(231, 76, 60, 0.08);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--zomato-red) !important;
+  letter-spacing: -0.5px;
+  transition: var(--transition-smooth);
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+  color: var(--zomato-dark-red) !important;
+}
+
+.nav-link {
+  color: var(--zomato-text-dark) !important;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.nav-link:hover {
+  background-color: var(--zomato-light);
+  color: var(--zomato-red) !important;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: 2px solid var(--zomato-red);
+}
+
+/* ============================================
+   BUTTON STYLING
+   ============================================ */
+.btn {
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--zomato-red) 0%, #F06292 100%);
+  border-color: transparent;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--zomato-dark-red) 0%, #E62667 100%);
+  border-color: transparent;
+  color: white;
+}
+
+.btn-primary:active,
+.btn-primary:focus {
+  background: linear-gradient(135deg, var(--zomato-dark-red) 0%, #E62667 100%);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+.btn-outline-primary {
+  color: var(--zomato-red);
+  border: 2px solid var(--zomato-red);
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background: var(--zomato-light);
+  border-color: var(--zomato-red);
+  color: var(--zomato-red);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+  border: none;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #C0392B 0%, #A93226 100%);
+}
+
+.btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  font-weight: 600;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: white;
+  color: white;
+}
+
+.btn-outline-info {
+  color: #0DCAF0;
+  border: 2px solid #0DCAF0;
+}
+
+.btn-outline-info:hover {
+  background-color: rgba(13, 202, 240, 0.1);
+  border-color: #0DCAF0;
+  color: #0DCAF0;
+}
+
+/* Size variants */
+.btn-sm {
+  padding: 0.35rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* ============================================
+   CARD STYLING
+   ============================================ */
+.card {
+  border: 1px solid var(--zomato-border-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  background: white;
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--zomato-text-dark);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: var(--zomato-text-muted);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.card-text.text-success {
+  font-size: 1.1rem !important;
+  font-weight: 700;
+  color: var(--success-color) !important;
+}
+
+/* ============================================
+   FORM STYLING
+   ============================================ */
+.form-control {
+  border: 2px solid var(--zomato-border-light);
+  border-radius: var(--border-radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+  background-color: white;
+}
+
+.form-control:focus {
+  border-color: var(--zomato-red);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+  background-color: white;
+}
+
+.form-control::placeholder {
+  color: var(--zomato-text-muted);
+}
+
+.form-control:hover {
+  border-color: var(--zomato-text-muted);
+}
+
+/* ============================================
+   CONTAINER & SPACING
+   ============================================ */
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.mt-5 {
+  margin-top: 3rem !important;
+}
+
+.my-3 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.gap-2 {
+  gap: 1rem !important;
+}
+
+/* ============================================
+   CATEGORY STYLING
+   ============================================ */
+.category-item {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--zomato-border-light);
+  border-radius: var(--border-radius-md);
+  background: white;
+  color: var(--zomato-text-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  white-space: nowrap;
+  min-width: 110px;
+  text-align: center;
+}
+
+.category-item:hover {
+  border-color: var(--zomato-red);
+  color: var(--zomato-red);
+  background: var(--zomato-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.category-item.active {
+  background: linear-gradient(135deg, var(--zomato-red) 0%, #F06292 100%);
+  border-color: transparent;
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   LOGIN PAGE STYLING
+   ============================================ */
+.auth-container {
+  background: linear-gradient(135deg, var(--zomato-light) 0%, #FFFFFF 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-card {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--zomato-border-light);
+}
+
+.auth-card h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--zomato-text-dark);
+  font-size: 1.75rem;
+}
+
+.auth-card .form-control {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.auth-card .btn {
+  margin-top: 0.5rem;
+  padding: 0.85rem;
+  font-size: 1rem;
+}
+
+.auth-toggle {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--zomato-text-muted);
+  font-size: 0.95rem;
+}
+
+.auth-toggle span {
+  color: var(--zomato-red);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  margin-left: 0.3rem;
+}
+
+.auth-toggle span:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   FOOTER STYLING
+   ============================================ */
+.footer {
+  background: linear-gradient(135deg, #2C3E50 0%, #1C2833 100%);
+  color: white;
+  padding: 3rem 0 1.5rem;
+  margin-top: 4rem;
+  border-top: 3px solid var(--zomato-red);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.footer-section {
+  margin-bottom: 2rem;
+}
+
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-link:hover {
+  color: var(--zomato-red);
+  padding-left: 0.5rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-primary {
+  color: var(--zomato-red) !important;
+}
+
+.text-muted {
+  color: var(--zomato-text-muted) !important;
+}
+
+.bg-light {
+  background-color: var(--zomato-light-gray) !important;
+}
+
+.bg-blue {
+  background: linear-gradient(135deg, #E8F4F8 0%, #F0F8FC 100%) !important;
+  border-color: #B0E0E6 !important;
+}
+
+.border {
+  border-color: var(--zomato-border-light) !important;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+
+  .auth-card {
+    padding: 2rem;
+  }
+
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .card {
+    border-radius: var(--border-radius-md);
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+
+  .auth-card {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+
+  .btn-sm {
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .category-item {
+    min-width: 95px;
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================
+   ANIMATION KEYFRAMES
+   ============================================ */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-down {
+  animation: slideInDown 0.4s ease-out;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--zomato-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--zomato-dark-red);
+}
