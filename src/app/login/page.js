@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slices/authSlice";
 import { httpPost } from "@/services/api";
 import { toast } from "react-toastify";
+import LoadingButton from "@/components/LoadingButton";
 
 export default function AuthPage() {
   const router = useRouter();

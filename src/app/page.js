@@ -9,39 +9,60 @@ import { useEffect, useState } from "react";
 import HorizontalMenuCategory from "@/components/HorizontalMenuCategory";
 import ItemCard from "@/components/ItemCard";
 import { Button } from "react-bootstrap";
+import GrowSpinner from "@/components/GrowSpinner";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const menu = useSelector((state) => state.menu?.menu);
+  const { menu, loading } = useSelector((state) => state.menu);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
+const [pageLoading, setPageLoading] = useState(true);
 
   const onCategorySelect = (category) => {
     setSelectedCategory(category);
   };
+  // console.log("loading", loading);
 
   const handleSubmit = async () => {
-    const res = await httpPost("/menu");
-    // console.log("API RES 👉", res);
-    if (!res.error) {
-      dispatch(setMenu(res.data));
-    } else {
-      toast.error(res.message || "Something went wrong");
+    try {
+      setIsLoading(true);
+      const res = await httpPost("/menu");
+      if (!res.error) {
+        dispatch(setMenu(res.data));
+      } else {
+        toast.error(res.message || "Something went wrong");
+      }
+    } catch (err) {
+      toast.error("Server error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    if (menu?.length > 0) return; // Agar menu already loaded hai to API call mat karo{
+    if (menu?.length > 0) return;
     handleSubmit();
   }, []);
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setPageLoading(false);
+  }, 10); // 10 milliseconds
+
+  return () => clearTimeout(timer);
+}, []);
+
+if (pageLoading) {
+  return <GrowSpinner loading={pageLoading} />;
+}
 
   let filteredMenu =
     selectedCategory !== ""
       ? menu.filter((item) => item.category === selectedCategory)
       : menu;
+
   return (
     <>
       <Navbar />
-      {/* https://www.pexels.com/video/a-person-serving-food-5657164/ */}
       <div
         className="w-100 "
         style={{ maxHeight: "400px", overflow: "hidden", borderRadius: "12px" }}

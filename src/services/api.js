@@ -76,8 +76,12 @@ const httpGet = async (url, params = {}) =>
 const httpPost = async (url, params = {}) =>
     await makeHttpRequest('POST', url, params);
 
+// PUT request
+const httpPut = async (url, params = {}) =>
+    await makeHttpRequest('PUT', url, params);
+
 // DELETE request
 const httpDelete = async (url, params = {}) =>
     await makeHttpRequest('DELETE', url, params);
 
-export { authHeader, httpGet, httpPost, httpDelete };
+export { authHeader, httpGet, httpPost, httpPut, httpDelete };

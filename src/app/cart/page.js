@@ -5,15 +5,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { httpPost } from "@/services/api";
 import { toast } from "react-toastify";
 import Navbar from "@/components/Navbar";
-import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
 import { Trash2, PlusLg, DashLg } from "react-bootstrap-icons";
-import { addToCart, decreaseQty, removeFromCart } from "@/redux/slices/cartSlice";
+import {
+  addToCart,
+  decreaseQty,
+  removeFromCart,
+} from "@/redux/slices/cartSlice";
 
 export default function CartPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart?.items);
   const [cartState, setCartState] = useState(cart || []);
+  const { address = [] } = useSelector((state) => state.address);
+  const [selectedAddressId, setSelectedAddressId] = useState("");
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -25,42 +31,62 @@ export default function CartPage() {
     setCartState(cart || []);
   }, [cart, router]);
 
+  useEffect(() => {
+    if (address.length > 0) {
+      setSelectedAddressId(address[0]._id); // default first (already sorted)
+    }
+  }, [address]);
+  const selectedAddress = address?.find((a) => a._id === selectedAddressId);
+
   //Quantity change handler (increase/decrease)
   const handleQuantityChange = (itemId, newQty) => {
     // Find item from Redux cart
-  const item = cart.find(i => i._id === itemId);
-  if (!item) return;
+    const item = cart.find((i) => i._id === itemId);
+    if (!item) return;
 
-  //If new quantity is higher → add one more
-  if (newQty > item.qty) {
-    dispatch(addToCart(item)); // increase qty
-    //  If new quantity is lower → decrease quantity
-  } else if (newQty < item.qty) {
-    dispatch(decreaseQty(itemId)); // decrease qty
-  }
-};
+    //If new quantity is higher → add one more
+    if (newQty > item.qty) {
+      dispatch(addToCart(item)); // increase qty
+      //  If new quantity is lower → decrease quantity
+    } else if (newQty < item.qty) {
+      dispatch(decreaseQty(itemId)); // decrease qty
+    }
+  };
 
-const calculateTotal = () => {
-  return cart.reduce((total, item) => total + item.price * item.qty, 0);
-};
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.price * item.qty, 0);
+  };
 
-const handleRemoveItem = (itemId) => {
-  dispatch(removeFromCart(itemId));
-  toast.success("Item removed from cart");
-};
+  const handleRemoveItem = (itemId) => {
+    dispatch(removeFromCart(itemId));
+    toast.success("Item removed from cart");
+  };
 
-
-if (!cart || cart.length === 0)
- {
+  if (!cart || cart.length === 0) {
     return (
       <>
         <Navbar />
         <Container className="mt-5 text-center">
-          <div style={{ minHeight: "400px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div
+            style={{
+              minHeight: "400px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <div>
-              <h3 className="mb-3" style={{ color: "#E74C3C" }}>🛒 Your Cart is Empty</h3>
-              <p className="text-muted mb-4">Add some delicious items to get started!</p>
-              <Button variant="primary" onClick={() => router.push("/")} size="lg">
+              <h3 className="mb-3" style={{ color: "#E74C3C" }}>
+                🛒 Your Cart is Empty
+              </h3>
+              <p className="text-muted mb-4">
+                Add some delicious items to get started!
+              </p>
+              <Button
+                variant="primary"
+                onClick={() => router.push("/")}
+                size="lg"
+              >
                 🏠 Continue Shopping
               </Button>
             </div>
@@ -71,6 +97,31 @@ if (!cart || cart.length === 0)
   }
 
   const totalPrice = calculateTotal();
+
+  const checkout = async () => {
+    if (!selectedAddress) {
+      toast.error("Please select a delivery address before checkout.");
+      return;
+    }
+   return toast.success("wait for checkout api integration...");
+    // try {
+    //   const res = await httpPost("/order/create", {
+    //     addressId: selectedAddress._id,
+    //     items: cart.map((item) => ({
+    //       menuId: item._id,
+    //       quantity: item.qty,
+    //     })),
+    //   });
+    //   if (res.success) {
+    //     toast.success("Order placed successfully!");
+    //     // router.push("/orders");
+    //   } else {
+    //     toast.error(res.message || "Failed to place order. Please try again.");
+    //   }
+    // } catch (error) {
+    //   toast.error("An error occurred during checkout. Please try again.");
+    // }
+  };
 
   return (
     <>
@@ -95,7 +146,10 @@ if (!cart || cart.length === 0)
                     transition: "all 0.3s ease",
                   }}
                 >
-                  <div style={{ display: "flex", gap: "1rem" }} className="p-3 p-md-4">
+                  <div
+                    style={{ display: "flex", gap: "1rem" }}
+                    className="p-3 p-md-4"
+                  >
                     {/* Item Image */}
                     <div style={{ flex: "0 0 140px" }}>
                       <img
@@ -111,10 +165,19 @@ if (!cart || cart.length === 0)
                     </div>
 
                     {/* Item Details */}
-                    <div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    <div
+                      style={{
+                        flex: "1",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
                       <div className="mb-2">
                         <div className="d-flex align-items-center justify-content-between mb-2">
-                          <h5 className="mb-0" style={{ color: "#1C1C1C", fontWeight: "600" }}>
+                          <h5
+                            className="mb-0"
+                            style={{ color: "#1C1C1C", fontWeight: "600" }}
+                          >
                             {item.name}
                           </h5>
                           <button
@@ -248,6 +311,47 @@ if (!cart || cart.length === 0)
             </div>
           </Col>
 
+          <Col lg={4}>
+            {address.length > 0 ? (
+              <div className="mb-4">
+                <h5 className="mb-3">Delivery Address</h5>
+
+                {/* Dropdown Select */}
+                <Form.Select
+                  value={selectedAddressId}
+                  onChange={(e) => setSelectedAddressId(e.target.value)}
+                  className="mb-3"
+                >
+                  {address.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.fullAddress.substring(0, 40)}...
+                      {item.isDefault ? " (Default)" : ""}
+                    </option>
+                  ))}
+                </Form.Select>
+
+                {/* Selected Address Card */}
+                {selectedAddress && (
+                  <div className="border rounded p-3 bg-light">
+                    <strong>Address:</strong> {selectedAddress.fullAddress}
+                    <br />
+                    <strong>Phone:</strong> {selectedAddress.phone}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="mb-4 text-center">
+                <h5 className="mb-3">No Address Available</h5>
+                <Button
+                  variant="danger"
+                  onClick={() => router.push("/profile")}
+                >
+                  + Add Address
+                </Button>
+              </div>
+            )}
+          </Col>
+
           {/* Order Summary */}
           <Col lg={4}>
             <Card
@@ -329,7 +433,9 @@ if (!cart || cart.length === 0)
                   </div>
                   <div className="d-flex justify-content-between mb-3">
                     <span style={{ color: "#696969" }}>Delivery Fee</span>
-                    <span style={{ fontWeight: "600", color: "#27AE60" }}>FREE</span>
+                    <span style={{ fontWeight: "600", color: "#27AE60" }}>
+                      FREE
+                    </span>
                   </div>
                   <div
                     style={{
@@ -340,7 +446,13 @@ if (!cart || cart.length === 0)
                       alignItems: "center",
                     }}
                   >
-                    <span style={{ fontWeight: "700", fontSize: "1.1rem", color: "#1C1C1C" }}>
+                    <span
+                      style={{
+                        fontWeight: "700",
+                        fontSize: "1.1rem",
+                        color: "#1C1C1C",
+                      }}
+                    >
                       Total
                     </span>
                     <span
@@ -366,6 +478,7 @@ if (!cart || cart.length === 0)
                     padding: "0.75rem",
                     marginBottom: "0.75rem",
                   }}
+                    onClick={() => checkout()}
                 >
                   🛍️ Proceed to Checkout
                 </Button>

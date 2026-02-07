@@ -15,10 +15,10 @@ export default function RNavbar() {
 
   const handleLogout = () => {
     dispatch(logout());
-    router.push("/login");-
-  setTimeout(() => {
-    router.refresh();
-  }, 200);
+    router.push("/login");
+    setTimeout(() => {
+      router.refresh();
+    }, 200);
   };
 
   return (
@@ -55,7 +55,13 @@ export default function RNavbar() {
           <Nav className="align-items-center gap-3">
             {user ? (
               <>
-                <Nav.Item className="text-dark d-flex align-items-center gap-2">
+                <Nav.Item
+                  className="text-dark d-flex align-items-center gap-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => router.push("/profile")}
+                  hovered
+                  //  as={Link} href="/profile"
+                >
                   <PersonCircle size={22} />
                   <span className="fw-500">{user.name}</span>
                 </Nav.Item>
