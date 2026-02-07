@@ -1,54 +1,27 @@
-// import Button from "react-bootstrap/Button";
-// import Card from "react-bootstrap/Card";
-
-// function ItemCard({ data = [] }) {
-//   function handleClick(item) {
-//     console.log("itemcard", item);
-//   }
-//   return (
-//     <>
-//       {data?.map((item) => (
-//         <Card
-//           style={{ width: "18rem" }}
-//           key={item._id}
-//         >
-//           <Card.Img variant="top" src={item.image} />
-//           <Card.Body>
-//             <Card.Title>{item.name}</Card.Title>
-//             <Card.Text>{item.description}</Card.Text>
-//             <Card.Text>Price: {item.price}</Card.Text>
-//             <Button variant="primary" onClick={() => handleClick(item)}>Add to Cart</Button>
-//           </Card.Body>
-//         </Card>
-//       ))}
-//     </>
-//   );
-// }
-
-// export default ItemCard;
-
-"use client";
 "use client";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { addToCart } from "@/redux/slices/cartSlice";
 
 function ItemCard({ data = [] }) {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth);
-
+  // const cart = useSelector((state) => state.cart?.items);
+  
   function handleClick(item) {
     if (!user?.token) {
       alert("Please login to add items to cart");
       router.push("/login");
       return;
     }
+    dispatch(addToCart(item));
   }
-// https://www.pexels.com/video/a-person-serving-food-5657164/
   return (
     <Row className="g-4 mt-2">
       {data?.map((item) => (
