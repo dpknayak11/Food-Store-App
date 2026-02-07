@@ -32,7 +32,7 @@ const makeHttpRequest = async (method, url, params) => {
             ...axiosConfig
         });
 
-        console.log("API Success:", result);
+        // console.log("API Success:", result);
         return handleResponse(result);
 
     } catch (error) {
