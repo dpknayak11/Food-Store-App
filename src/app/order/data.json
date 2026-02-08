@@ -1,0 +1,153 @@
+[
+  {
+    "orderId": "ORD1001",
+    "user": "65f1a2b3c4d5e6f7890a1111",
+    "items": [
+      {
+        "menuItem": "697f853af4add5c373bfee91",
+        "name": "Chicken Burger",
+        "price": 149,
+        "quantity": 2,
+        "notes": "Extra mayo"
+      },
+      {
+        "menuItem": "697f853af4add5c373bfee9e",
+        "name": "Peri Peri Fries",
+        "price": 79,
+        "quantity": 1
+      }
+    ],
+    "deliveryInfo": {
+      "name": "Rahul Sharma",
+      "phone": "9876543210",
+      "address": "Flat 402, Green Residency, MG Road, Jaipur",
+      "notes": "Call before delivery"
+    },
+    "subtotal": 377,
+    "deliveryFee": 30,
+    "total": 407,
+    "status": "received",
+    "meta": {}
+  },
+  {
+    "orderId": "ORD1002",
+    "user": "65f1a2b3c4d5e6f7890a1112",
+    "items": [
+      {
+        "menuItem": "697f853af4add5c373bfeeaf",
+        "name": "Chicken Biryani",
+        "price": 229,
+        "quantity": 1
+      }
+    ],
+    "deliveryInfo": {
+      "name": "Priya Verma",
+      "phone": "9123456780",
+      "address": "Sector 15, Noida",
+      "notes": ""
+    },
+    "subtotal": 229,
+    "deliveryFee": 25,
+    "total": 254,
+    "status": "preparing",
+    "meta": {}
+  },
+  {
+    "orderId": "ORD1003",
+    "user": "65f1a2b3c4d5e6f7890a1113",
+    "items": [
+      {
+        "menuItem": "697f853af4add5c373bfee97",
+        "name": "Chicken Alfredo Pasta",
+        "price": 229,
+        "quantity": 1
+      },
+      {
+        "menuItem": "697f853af4add5c373bfee98",
+        "name": "Veg Sandwich",
+        "price": 79,
+        "quantity": 2
+      }
+    ],
+    "deliveryInfo": {
+      "name": "Amit Patel",
+      "phone": "9988776655",
+      "address": "Bopal, Ahmedabad",
+      "notes": "No onions"
+    },
+    "subtotal": 387,
+    "deliveryFee": 35,
+    "total": 422,
+    "status": "out_for_delivery",
+    "meta": {}
+  },
+  {
+    "orderId": "ORD1004",
+    "user": "65f1a2b3c4d5e6f7890a1114",
+    "items": [
+      {
+        "menuItem": "697f853af4add5c373bfeeb3",
+        "name": "Paneer Tikka Wrap",
+        "price": 129,
+        "quantity": 3
+      }
+    ],
+    "deliveryInfo": {
+      "name": "Sneha Kapoor",
+      "phone": "9090909090",
+      "address": "Indiranagar, Bangalore",
+      "notes": ""
+    },
+    "subtotal": 387,
+    "deliveryFee": 20,
+    "total": 407,
+    "status": "delivered",
+    "meta": {}
+  },
+  {
+    "orderId": "ORD1005",
+    "user": "65f1a2b3c4d5e6f7890a1115",
+    "items": [
+      {
+        "menuItem": "697f853af4add5c373bfee91",
+        "name": "Chicken Burger",
+        "price": 149,
+        "quantity": 1
+      }
+    ],
+    "deliveryInfo": {
+      "name": "Rohit Singh",
+      "phone": "9870011223",
+      "address": "Alambagh, Lucknow",
+      "notes": "Extra ketchup"
+    },
+    "subtotal": 149,
+    "deliveryFee": 30,
+    "total": 179,
+    "status": "cancelled",
+    "meta": { "cancelReason": "Customer requested cancellation" }
+  },
+  {
+    "orderId": "ORD1006",
+    "user": "65f1a2b3c4d5e6f7890a1116",
+    "items": [
+      {
+        "menuItem": "697f853af4add5c373bfeeaf",
+        "name": "Chicken Biryani",
+        "price": 229,
+        "quantity": 2
+      }
+    ],
+    "deliveryInfo": {
+      "name": "Karan Mehta",
+      "phone": "9812345678",
+      "address": "Salt Lake, Kolkata",
+      "notes": "Less spicy"
+    },
+    "subtotal": 458,
+    "deliveryFee": 40,
+    "total": 498,
+    "status": "preparing",
+    "meta": {}
+  }
+]

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { httpPost } from "@/services/api";
+import { httpGet, httpPost } from "@/services/api";
 import { toast } from "react-toastify";
 import Navbar from "@/components/Navbar";
 import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
@@ -12,6 +12,7 @@ import {
   decreaseQty,
   removeFromCart,
 } from "@/redux/slices/cartSlice";
+import { clearAddress, setAddress } from "@/redux/slices/addressSlice";
 
 export default function CartPage() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function CartPage() {
   const [cartState, setCartState] = useState(cart || []);
   const { address = [] } = useSelector((state) => state.address);
   const [selectedAddressId, setSelectedAddressId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -36,6 +38,8 @@ export default function CartPage() {
       setSelectedAddressId(address[0]._id); // default first (already sorted)
     }
   }, [address]);
+
+
   const selectedAddress = address?.find((a) => a._id === selectedAddressId);
 
   //Quantity change handler (increase/decrease)
@@ -103,7 +107,7 @@ export default function CartPage() {
       toast.error("Please select a delivery address before checkout.");
       return;
     }
-   return toast.success("wait for checkout api integration...");
+    return toast.success("wait for checkout api integration...");
     // try {
     //   const res = await httpPost("/order/create", {
     //     addressId: selectedAddress._id,
@@ -478,7 +482,7 @@ export default function CartPage() {
                     padding: "0.75rem",
                     marginBottom: "0.75rem",
                   }}
-                    onClick={() => checkout()}
+                  onClick={() => checkout()}
                 >
                   🛍️ Proceed to Checkout
                 </Button>

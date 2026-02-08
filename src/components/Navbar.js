@@ -4,8 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
 import { useRouter } from "next/navigation";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { Cart, PersonCircle } from "react-bootstrap-icons";
+import {
+  Cart,
+  PersonCircle,
+  BoxSeam,
+  BoxArrowRight,
+} from "react-bootstrap-icons";
 import { refresh } from "next/cache";
+import { useEffect } from "react";
+import { httpGet } from "@/services/api";
+import { clearAddress, setAddress } from "@/redux/slices/addressSlice";
 
 export default function RNavbar() {
   const dispatch = useDispatch();
@@ -20,6 +28,27 @@ export default function RNavbar() {
       router.refresh();
     }, 200);
   };
+
+  const fetchAddresses = async () => {
+    try {
+      const res = await httpGet("/address");
+      if (!res.error) {
+        dispatch(clearAddress()); // old cache clear
+        dispatch(setAddress(res.data || [])); // fresh store + session save
+      } else {
+        // toast.error(res.message || "Failed to fetch addresses");
+      }
+    } catch (err) {
+      // toast.error("Failed to fetch addresses");
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      fetchAddresses();
+    }
+  }, [token]);
 
   return (
     <Navbar expand="lg" className="px-3 py-2 navbar">
@@ -55,22 +84,34 @@ export default function RNavbar() {
           <Nav className="align-items-center gap-3">
             {user ? (
               <>
+                {/* Profile */}
                 <Nav.Item
-                  className="text-dark d-flex align-items-center gap-2"
+                  className="d-flex align-items-center gap-2 px-3 py-2 rounded text-dark bg-light bg-opacity-0 hover-bg"
                   style={{ cursor: "pointer" }}
                   onClick={() => router.push("/profile")}
-                  hovered
-                  //  as={Link} href="/profile"
                 >
-                  <PersonCircle size={22} />
-                  <span className="fw-500">{user.name}</span>
+                  <PersonCircle size={20} />
+                  <span>{user?.name}</span>
                 </Nav.Item>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={handleLogout}
-                  className=""
+
+                {/* Orders */}
+                <Nav.Item
+                  className="d-flex align-items-center gap-2 px-3 py-2 rounded text-dark bg-light bg-opacity-0"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => router.push("/order")}
                 >
+                  <BoxSeam size={18} />
+                  <span>Orders</span>
+                </Nav.Item>
+
+                {/* Logout */}
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  className="d-flex align-items-center gap-2 rounded-pill px-3"
+                  onClick={handleLogout}
+                >
+                  <BoxArrowRight size={18} />
                   Logout
                 </Button>
               </>

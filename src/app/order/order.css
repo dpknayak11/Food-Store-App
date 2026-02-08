@@ -1,0 +1,41 @@
+/* Order Page - Minimal Animations */
+
+/* Card Fade In Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.order-card-animate {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Status Emoji Animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.status-emoji {
+  display: inline-block;
+  font-size: 1.2em;
+}
+
+.status-emoji.status-preparing {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.status-emoji.status-out_for_delivery {
+  animation: slideLeft 1.5s ease-in-out infinite;
+}
+
+@keyframes slideLeft {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}

@@ -7,11 +7,12 @@ import Navbar from "@/components/Navbar";
 import AddressModal from "@/components/AddressModal";
 import { httpPost, httpDelete, httpGet } from "@/services/api";
 import { clearAddress, setAddress } from "@/redux/slices/addressSlice";
+import GrowSpinner from "@/components/GrowSpinner";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { address = [] } = useSelector((state) => state.address);
+  const { address = [] } = useSelector((state) => state?.address);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -32,10 +33,11 @@ const fetchAddresses = async () => {
       dispatch(clearAddress());               // old cache clear
       dispatch(setAddress(res.data || []));   // fresh store + session save
     } else {
-      toast.error(res.message || "Failed to fetch addresses");
+      dispatch(setAddress(res.data || []));   // fresh store + session save
+    //   toast.error(res.message || "Failed to fetch addresses");
     }
   } catch (err) {
-    toast.error("Failed to fetch addresses");
+    // toast.error("Failed to fetch addresses");
   } finally {
     setIsLoading(false);
   }
@@ -154,6 +156,12 @@ const fetchAddresses = async () => {
     // Fetch addresses when component mounts
     fetchAddresses();
   }, []);
+
+  if (isLoading) {
+  return <GrowSpinner loading={isLoading} />;
+}
+
+
   return (
     <>
       <Navbar />
@@ -202,9 +210,9 @@ const fetchAddresses = async () => {
               </Button>
             </div>
 
-            {Array.isArray(address) && address.length > 0 ? (
+            {Array.isArray(address) && address?.length > 0 ? (
               <Row>
-                {address.map((addr) => (
+                {address?.map((addr) => (
                   <Col md={6} key={addr._id} className="mb-4">
                     <Card
                       className={`shadow-sm ${addr.isDefault ? "border-primary" : ""}`}
