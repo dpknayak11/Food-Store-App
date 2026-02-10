@@ -9,14 +9,15 @@ import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
 import { Trash2, PlusLg, DashLg } from "react-bootstrap-icons";
 import {
   addToCart,
+  clearCart,
   decreaseQty,
   removeFromCart,
 } from "@/redux/slices/cartSlice";
-import { clearAddress, setAddress } from "@/redux/slices/addressSlice";
 
 export default function CartPage() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart?.items);
   const [cartState, setCartState] = useState(cart || []);
   const { address = [] } = useSelector((state) => state.address);
@@ -24,12 +25,12 @@ export default function CartPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!cart || cart.length === 0) {
-      toast.info("Your cart is empty. Redirecting to home page...");
-      setTimeout(() => {
-        router.push("/");
-      }, 1500);
-    }
+    // if (!cart || cart.length === 0) {
+    //   toast.info("Your cart is empty. Redirecting to home page...");
+    //   setTimeout(() => {
+    //     router.push("/");
+    //   }, 3000);
+    // }
     setCartState(cart || []);
   }, [cart, router]);
 
@@ -64,6 +65,57 @@ export default function CartPage() {
   const handleRemoveItem = (itemId) => {
     dispatch(removeFromCart(itemId));
     toast.success("Item removed from cart");
+  };
+
+  const checkout = async () => {
+    if (!selectedAddress) {
+      toast.error("Please select a delivery address before checkout.");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const subtotal = calculateTotal();
+      const deliveryFee = subtotal >= 500 ? 0 : 40; // Free delivery for orders above ₹500
+      const total = subtotal + deliveryFee;
+
+      const payload = {
+        items: cart.map((item) => ({
+          menuItem: item._id,
+          name: item.name,
+          price: item.price,
+          quantity: item.qty,
+          ...(item.notes && { notes: item.notes }),
+        })),
+        deliveryInfo: {
+          name: user?.name || selectedAddress.name || "Guest",
+          phone: selectedAddress.phone,
+          address: selectedAddress.fullAddress,
+          ...(selectedAddress.notes && { notes: selectedAddress.notes }),
+        },
+        subtotal,
+        deliveryFee,
+        total,
+        meta: {},
+      };
+
+      const res = await httpPost("/order/create", payload);
+
+      if (res.success || !res.error) {
+        toast.success("Order placed successfully!");
+        dispatch(clearCart());
+        setTimeout(() => {
+          router.push("/order");
+        }, 1000);
+      } else {
+        toast.error(res.message || "Failed to place order. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An error occurred during checkout. Please try again.");
+      console.error("Checkout error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!cart || cart.length === 0) {
@@ -101,31 +153,6 @@ export default function CartPage() {
   }
 
   const totalPrice = calculateTotal();
-
-  const checkout = async () => {
-    if (!selectedAddress) {
-      toast.error("Please select a delivery address before checkout.");
-      return;
-    }
-    return toast.success("wait for checkout api integration...");
-    // try {
-    //   const res = await httpPost("/order/create", {
-    //     addressId: selectedAddress._id,
-    //     items: cart.map((item) => ({
-    //       menuId: item._id,
-    //       quantity: item.qty,
-    //     })),
-    //   });
-    //   if (res.success) {
-    //     toast.success("Order placed successfully!");
-    //     // router.push("/orders");
-    //   } else {
-    //     toast.error(res.message || "Failed to place order. Please try again.");
-    //   }
-    // } catch (error) {
-    //   toast.error("An error occurred during checkout. Please try again.");
-    // }
-  };
 
   return (
     <>
@@ -438,7 +465,7 @@ export default function CartPage() {
                   <div className="d-flex justify-content-between mb-3">
                     <span style={{ color: "#696969" }}>Delivery Fee</span>
                     <span style={{ fontWeight: "600", color: "#27AE60" }}>
-                      FREE
+                     {totalPrice >= 500 ? "FREE" : "₹ 40"}
                     </span>
                   </div>
                   <div
@@ -483,8 +510,9 @@ export default function CartPage() {
                     marginBottom: "0.75rem",
                   }}
                   onClick={() => checkout()}
+                  disabled={isLoading || !selectedAddress}
                 >
-                  🛍️ Proceed to Checkout
+                  {isLoading ? "⏳ Processing..." : "🛍️ Proceed to Checkout"}
                 </Button>
 
                 <Button

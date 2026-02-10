@@ -1,7 +1,7 @@
 [
   {
-    "orderId": "ORD1001",
-    "user": "65f1a2b3c4d5e6f7890a1111",
+    "_id": "ORD1001",
+    "userId": "65f1a2b3c4d5e6f7890a1111",
     "items": [
       {
         "menuItem": "697f853af4add5c373bfee91",
@@ -24,13 +24,13 @@
       "notes": "Call before delivery"
     },
     "subtotal": 377,
-    "deliveryFee": 30,
-    "total": 407,
+    "deliveryFee": 0,
+    "total": 377,
     "status": "received",
     "meta": {}
   },
   {
-    "orderId": "ORD1002",
+    "_id": "ORD1002",
     "user": "65f1a2b3c4d5e6f7890a1112",
     "items": [
       {
@@ -53,7 +53,7 @@
     "meta": {}
   },
   {
-    "orderId": "ORD1003",
+    "_id": "ORD1003",
     "user": "65f1a2b3c4d5e6f7890a1113",
     "items": [
       {
@@ -82,7 +82,7 @@
     "meta": {}
   },
   {
-    "orderId": "ORD1004",
+    "_id": "ORD1004",
     "user": "65f1a2b3c4d5e6f7890a1114",
     "items": [
       {
@@ -105,7 +105,7 @@
     "meta": {}
   },
   {
-    "orderId": "ORD1005",
+    "_id": "ORD1005",
     "user": "65f1a2b3c4d5e6f7890a1115",
     "items": [
       {
@@ -128,7 +128,7 @@
     "meta": { "cancelReason": "Customer requested cancellation" }
   },
   {
-    "orderId": "ORD1006",
+    "_id": "ORD1006",
     "user": "65f1a2b3c4d5e6f7890a1116",
     "items": [
       {

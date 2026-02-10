@@ -28,7 +28,9 @@ export default function OrderPage() {
   const fetchOrders = async () => {
     try {
       setIsLoading(true);
-      setOrders(data || []);
+      const res = await httpGet("/order");
+      console.log("res.data", res.data);
+      setOrders(res.data || []);
     } catch (err) {
       toast.error("Failed to load orders");
     } finally {
@@ -53,7 +55,8 @@ export default function OrderPage() {
         ) : (
           <Row className="g-3">
             {orders.map((order) => {
-              const status = STATUS_CONFIG[order.status] || STATUS_CONFIG.received;
+              const status =
+                STATUS_CONFIG[order.status] || STATUS_CONFIG.received;
               return (
                 <Col md={6} key={order._id} className="order-card-animate">
                   <Card className="h-100 border-0 shadow-sm">
@@ -62,17 +65,19 @@ export default function OrderPage() {
                       <div className="d-flex justify-content-between align-items-center">
                         <div>
                           <p className="mb-0 small text-muted">
-                            Order #{order.orderId}
+                            Order #{order._id.slice(-6).toUpperCase()}
                           </p>
                           <small className="text-muted">
                             {new Date(order.createdAt).toLocaleDateString(
                               "en-IN",
-                              { month: "short", day: "numeric" }
+                              { month: "short", day: "numeric" },
                             )}
                           </small>
                         </div>
                         <Badge bg={status.color} className="fs-6">
-                          <span className={`status-emoji status-${order.status}`}>
+                          <span
+                            className={`status-emoji status-${order.status}`}
+                          >
                             {status.emoji}
                           </span>{" "}
                           {status.label}
@@ -84,7 +89,9 @@ export default function OrderPage() {
                     <Card.Body>
                       {/* Delivery Info */}
                       <div className="mb-3 p-2 bg-light rounded">
-                        <small className="fw-bold">📍 {order.deliveryInfo?.name}</small>
+                        <small className="fw-bold">
+                          📍 {order.deliveryInfo?.name}
+                        </small>
                         <br />
                         <small className="text-muted">
                           {order.deliveryInfo?.address}
@@ -93,9 +100,14 @@ export default function OrderPage() {
 
                       {/* Items Summary */}
                       <div className="mb-3">
-                        <small className="fw-bold d-block mb-2">🍽️ Items ({order.items?.length || 0})</small>
+                        <small className="fw-bold d-block mb-2">
+                          🍽️ Items ({order.items?.length || 0})
+                        </small>
                         {order.items?.slice(0, 2).map((item, idx) => (
-                          <div key={idx} className="d-flex justify-content-between small mb-1">
+                          <div
+                            key={idx}
+                            className="d-flex justify-content-between small mb-1"
+                          >
                             <span>{item.name}</span>
                             <span className="text-muted">x{item.quantity}</span>
                           </div>
@@ -119,7 +131,9 @@ export default function OrderPage() {
                         </div>
                         <div className="d-flex justify-content-between fw-bold">
                           <span>Total</span>
-                          <span className="text-primary">₹{order.total?.toFixed(2)}</span>
+                          <span className="text-primary">
+                            ₹{order.total?.toFixed(2)}
+                          </span>
                         </div>
                       </div>
                     </Card.Body>
