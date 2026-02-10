@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import GrowSpinner from "@/components/GrowSpinner";
 import "./order.css";
-import data from "./data.json";
+// import data from "./data.json";
 
 const STATUS_CONFIG = {
   received: { label: "Order Received", emoji: "📦", color: "primary" },
@@ -29,7 +29,6 @@ export default function OrderPage() {
     try {
       setIsLoading(true);
       const res = await httpGet("/order");
-      console.log("res.data", res.data);
       setOrders(res.data || []);
     } catch (err) {
       toast.error("Failed to load orders");
