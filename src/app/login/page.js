@@ -51,7 +51,9 @@ export default function AuthPage() {
       dispatch(setUser({ user, token }));
       localStorage.setItem("token", token);
 
-      router.push("/");
+      // router.push("/");
+      window.location.reload();
+
     } else {
       toast.error(res.message || "Something went wrong");
     }
