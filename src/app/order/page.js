@@ -8,6 +8,8 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import GrowSpinner from "@/components/GrowSpinner";
 import "./order.css";
 // import data from "./data.json";
+  import moment from "moment-timezone";
+
 
 const STATUS_CONFIG = {
   received: { label: "Order Received", emoji: "📦", color: "primary" },
@@ -36,6 +38,52 @@ export default function OrderPage() {
       setIsLoading(false);
     }
   };
+
+
+// ⏱ Check if order is within last 30 minutes using createdTime
+const isRecentOrder = (createdTime) => {
+  if (!createdTime) return false;
+  const orderTime = moment.tz(
+    createdTime,
+    "M/D/YYYY, h:mm A",
+    "Asia/Kolkata"
+  );
+  const now = moment().tz("Asia/Kolkata");
+  const diffMinutes = now.diff(orderTime, "minutes");
+  return diffMinutes <= 30;
+};
+
+useEffect(() => {
+  if (!orders.length) return;
+
+  const activeStatuses = [
+    "received",
+    "preparing",
+    "out_for_delivery",
+    "delivered",
+  ];
+
+  // 🔍 Check if any order qualifies for auto refresh
+  const shouldAutoRefresh = orders.some(
+    (order) =>
+      activeStatuses.includes(order.status) &&
+      isRecentOrder(order.createdTime)
+  );
+
+  if (!shouldAutoRefresh) return;
+
+  console.log("⏳ Auto refresh enabled for active recent orders");
+
+  const interval = setInterval(() => {
+    console.log("🔄 Auto refreshing orders...");
+    fetchOrders();
+  }, 2 * 60 * 1000); // 5 minutes
+
+  return () => clearInterval(interval);
+}, [orders]);
+
+
+
 
   return (
     <ProtectedRoute>
