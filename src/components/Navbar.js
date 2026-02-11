@@ -11,7 +11,7 @@ import {
   BoxArrowRight,
 } from "react-bootstrap-icons";
 import { refresh } from "next/cache";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { httpGet } from "@/services/api";
 import { clearAddress, setAddress } from "@/redux/slices/addressSlice";
 
@@ -29,26 +29,34 @@ export default function RNavbar() {
     }, 200);
   };
 
+  const address = useSelector((state) => state.address?.address || []);
+  const fetchRef = useRef(false);
+
   const fetchAddresses = async () => {
     try {
       const res = await httpGet("/address");
       if (!res.error) {
         dispatch(clearAddress()); // old cache clear
         dispatch(setAddress(res.data || [])); // fresh store + session save
-      } else {
-        // toast.error(res.message || "Failed to fetch addresses");
       }
     } catch (err) {
-      // toast.error("Failed to fetch addresses");
-    } finally {
+      // error handling
     }
   };
 
   useEffect(() => {
-    if (token) {
+    // Check sessionStorage for cached data first
+    const cached = sessionStorage.getItem("address");
+    if (cached) {
+      dispatch(setAddress(JSON.parse(cached)));
+    }
+
+    // Only fetch once when token is set and we haven't fetched yet
+    if (token && !fetchRef.current && address.length === 0) {
+      fetchRef.current = true;
       fetchAddresses();
     }
-  }, [token]);
+  }, [token, dispatch]);
 
   return (
     <Navbar expand="lg" className="px-3 py-2 navbar">

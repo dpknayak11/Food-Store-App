@@ -5,7 +5,7 @@ import { setUser } from "@/redux/slices/authSlice";
 import { httpPost } from "@/services/api";
 import { toast } from "react-toastify";
 import { setMenu } from "@/redux/slices/menuSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import HorizontalMenuCategory from "@/components/HorizontalMenuCategory";
 import ItemCard from "@/components/ItemCard";
 import { Button } from "react-bootstrap";
@@ -16,7 +16,8 @@ export default function Home() {
   const { menu, loading } = useSelector((state) => state.menu);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
-const [pageLoading, setPageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(true);
+  const fetchRef = useRef(false);
 
   const onCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -40,8 +41,10 @@ const [pageLoading, setPageLoading] = useState(true);
   };
 
   useEffect(() => {
-    if (menu?.length > 0) return;
-    handleSubmit();
+    if (!fetchRef.current && menu?.length === 0) {
+      fetchRef.current = true;
+      handleSubmit();
+    }
   }, []);
   useEffect(() => {
   const timer = setTimeout(() => {

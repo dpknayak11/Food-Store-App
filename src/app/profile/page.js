@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -21,6 +21,7 @@ export default function ProfilePage() {
     phone: "",
     isDefault: false,
   });
+  const fetchRef = useRef(false);
 
 
 
@@ -152,9 +153,17 @@ const fetchAddresses = async () => {
 
 
   useEffect(() => {
-    if(address?.length > 0) return;
-    // Fetch addresses when component mounts
-    fetchAddresses();
+    // Only fetch if we haven't fetched yet
+    if (!fetchRef.current) {
+      fetchRef.current = true;
+      // Check sessionStorage for cached data first
+      const cached = sessionStorage.getItem("address");
+      if (cached) {
+        dispatch(setAddress(JSON.parse(cached)));
+      } else if (address?.length === 0) {
+        fetchAddresses();
+      }
+    }
   }, []);
 
   if (isLoading) {
