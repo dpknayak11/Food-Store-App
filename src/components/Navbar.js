@@ -21,11 +21,12 @@ export default function RNavbar() {
   const { user, token } = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart?.items);
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async() => {
+   await dispatch(logout());
     router.push("/login");
     setTimeout(() => {
-      router.refresh();
+      // router.refresh();
+      window.location.reload();
     }, 200);
   };
 

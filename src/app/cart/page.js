@@ -13,6 +13,8 @@ import {
   decreaseQty,
   removeFromCart,
 } from "@/redux/slices/cartSlice";
+import ProtectedRoute from "@/components/ProtectedRoute";
+
 
 export default function CartPage() {
   const router = useRouter();
@@ -121,7 +123,7 @@ export default function CartPage() {
 
   if (!cart || cart.length === 0) {
     return (
-      <>
+      <ProtectedRoute>
         <Navbar />
         <Container className="mt-5 text-center">
           <div
@@ -149,14 +151,16 @@ export default function CartPage() {
             </div>
           </div>
         </Container>
-      </>
+     </ProtectedRoute>
+
     );
   }
 
   const totalPrice = calculateTotal();
 
   return (
-    <>
+      <ProtectedRoute>
+
       <Navbar />
       <Container className="mt-5 mb-5">
         <h2 className="mb-4" style={{ color: "#1C1C1C", fontWeight: "700" }}>
@@ -556,6 +560,6 @@ export default function CartPage() {
           }
         }
       `}</style>
-    </>
+    </ProtectedRoute>
   );
 }

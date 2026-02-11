@@ -31,8 +31,8 @@ const authSlice = createSlice({
       localStorage.removeItem("cartItems");
       sessionStorage.removeItem("menu");
       sessionStorage.removeItem("menu_expiry");
-       sessionStorage.removeItem("address");
-    sessionStorage.removeItem("address_expiry");
+      sessionStorage.removeItem("address");
+      sessionStorage.removeItem("address_expiry");
     },
   },
 });

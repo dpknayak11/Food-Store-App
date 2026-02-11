@@ -8,6 +8,7 @@ import AddressModal from "@/components/AddressModal";
 import { httpPost, httpDelete, httpGet } from "@/services/api";
 import { clearAddress, setAddress } from "@/redux/slices/addressSlice";
 import GrowSpinner from "@/components/GrowSpinner";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
@@ -170,7 +171,7 @@ const fetchAddresses = async () => {
 
 
   return (
-    <>
+    <ProtectedRoute>
       <Navbar />
       <Container className="my-5">
         {/* User Profile Section */}
@@ -288,6 +289,6 @@ const fetchAddresses = async () => {
         handleSubmit={handleSubmit}
         isLoading={isLoading}
       />
-    </>
+    </ProtectedRoute>
   );
 }
