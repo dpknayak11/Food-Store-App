@@ -12,26 +12,23 @@ export default function AuthPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (token) {
       router.push("/");
     }
   }, [router]);
-
   const [isLogin, setIsLogin] = useState(true);
-
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
   });
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async () => {
+    setIsLoading(true);
     const url = isLogin ? "/auth/login" : "/auth/register";
 
     const payload = isLogin
@@ -53,9 +50,10 @@ export default function AuthPage() {
 
       // router.push("/");
       window.location.reload();
-
+      setIsLoading(false);
     } else {
       toast.error(res.message || "Something went wrong");
+      setIsLoading(false);
     }
   };
 
@@ -90,8 +88,22 @@ export default function AuthPage() {
           onChange={handleChange}
         />
 
-        <button className="btn btn-primary w-100 mt-2" onClick={handleSubmit}>
+        {/* <button className="btn btn-primary w-100 mt-2" onClick={handleSubmit}>
           {isLogin ? "Login" : "Create Account"}
+        </button> */}
+
+        <button
+          className="btn btn-primary w-100 mt-2"
+          onClick={handleSubmit}
+          disabled={isLoading}
+        >
+          {isLoading
+            ? isLogin
+              ? "Logging in..."
+              : "Creating Account..."
+            : isLogin
+              ? "Login"
+              : "Create Account"}
         </button>
 
         <p className="auth-toggle">

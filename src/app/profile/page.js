@@ -23,8 +23,6 @@ export default function ProfilePage() {
   });
   const fetchRef = useRef(false);
 
-
-
   // Fetch addresses on component mount
 const fetchAddresses = async () => {
   try {

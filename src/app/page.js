@@ -14,6 +14,9 @@ import GrowSpinner from "@/components/GrowSpinner";
 export default function Home() {
   const dispatch = useDispatch();
   const { menu, loading } = useSelector((state) => state.menu);
+  const cart = useSelector((state) => state.cart?.items);
+  console.log("cart", cart);
+
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [pageLoading, setPageLoading] = useState(true);
@@ -28,6 +31,7 @@ export default function Home() {
     try {
       setIsLoading(true);
       const res = await httpPost("/menu");
+
       if (!res.error) {
         dispatch(setMenu(res.data));
       } else {
@@ -47,16 +51,16 @@ export default function Home() {
     }
   }, []);
   useEffect(() => {
-  const timer = setTimeout(() => {
-    setPageLoading(false);
-  }, 10); // 10 milliseconds
+    const timer = setTimeout(() => {
+      setPageLoading(false);
+    }, 10); // 10 milliseconds
 
-  return () => clearTimeout(timer);
-}, []);
+    return () => clearTimeout(timer);
+  }, []);
 
-if (pageLoading) {
-  return <GrowSpinner loading={pageLoading} />;
-}
+  if (pageLoading) {
+    return <GrowSpinner loading={pageLoading} />;
+  }
 
   let filteredMenu =
     selectedCategory !== ""
