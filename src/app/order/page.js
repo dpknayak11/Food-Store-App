@@ -7,9 +7,7 @@ import Navbar from "@/components/Navbar";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import GrowSpinner from "@/components/GrowSpinner";
 import "./order.css";
-// import data from "./data.json";
-  import moment from "moment-timezone";
-
+import moment from "moment-timezone";
 
 const STATUS_CONFIG = {
   received: { label: "Order Received", emoji: "📦", color: "primary" },
@@ -39,51 +37,56 @@ export default function OrderPage() {
     }
   };
 
+  // ⏱ Check if order is within last 30 mins using createdTime
+  const isRecentOrder = (createdTime) => {
+    if (!createdTime) return false;
+    const orderTime = moment.tz(createdTime, "M/D/YYYY, h:mm A", "Asia/Kolkata");
+    const now = moment().tz("Asia/Kolkata");
+    return now.diff(orderTime, "minutes") <= 30;
+  };
 
-// ⏱ Check if order is within last 30 minutes using createdTime
-const isRecentOrder = (createdTime) => {
-  if (!createdTime) return false;
-  const orderTime = moment.tz(
-    createdTime,
-    "M/D/YYYY, h:mm A",
-    "Asia/Kolkata"
-  );
-  const now = moment().tz("Asia/Kolkata");
-  const diffMinutes = now.diff(orderTime, "minutes");
-  return diffMinutes <= 30;
-};
+  // 🔄 Auto refresh active recent orders every 2 mins
+  useEffect(() => {
+    if (!orders.length) return;
 
-useEffect(() => {
-  if (!orders.length) return;
+    const activeStatuses = [
+      "received",
+      "preparing",
+      "out_for_delivery",
+      "delivered",
+    ];
 
-  const activeStatuses = [
-    "received",
-    "preparing",
-    "out_for_delivery",
-    "delivered",
-  ];
+    const shouldAutoRefresh = orders.some(
+      (order) =>
+        activeStatuses.includes(order.status) &&
+        isRecentOrder(order.createdTime)
+    );
 
-  // 🔍 Check if any order qualifies for auto refresh
-  const shouldAutoRefresh = orders.some(
-    (order) =>
-      activeStatuses.includes(order.status) &&
-      isRecentOrder(order.createdTime)
-  );
+    if (!shouldAutoRefresh) return;
 
-  if (!shouldAutoRefresh) return;
+    const interval = setInterval(() => {
+      fetchOrders();
+    }, 2 * 60 * 1000);
 
-  console.log("⏳ Auto refresh enabled for active recent orders");
+    return () => clearInterval(interval);
+  }, [orders]);
 
-  const interval = setInterval(() => {
-    console.log("🔄 Auto refreshing orders...");
-    fetchOrders();
-  }, 2 * 60 * 1000); // 5 minutes
+  // ⏳ ETA calculator
+  const getETA = (createdTime, status) => {
+    const orderTime = moment.tz(createdTime, "M/D/YYYY, h:mm A", "Asia/Kolkata");
+    const now = moment().tz("Asia/Kolkata");
+    const minutesPassed = now.diff(orderTime, "minutes");
 
-  return () => clearInterval(interval);
-}, [orders]);
+    let totalTime = 15;
+    if (status === "preparing") totalTime = 10;
+    if (status === "out_for_delivery") totalTime = 5;
+    if (status === "delivered") return "Delivered";
 
+    const remaining = totalTime - minutesPassed;
+    return remaining > 0 ? `${remaining} min away` : "Arriving...";
+  };
 
-
+  const steps = ["received", "preparing", "out_for_delivery", "delivered"];
 
   return (
     <ProtectedRoute>
@@ -104,10 +107,11 @@ useEffect(() => {
             {orders.map((order) => {
               const status =
                 STATUS_CONFIG[order.status] || STATUS_CONFIG.received;
+              const currentStep = steps.indexOf(order.status);
+
               return (
                 <Col md={6} key={order._id} className="order-card-animate">
                   <Card className="h-100 border-0 shadow-sm">
-                    {/* Header */}
                     <Card.Header className="bg-white">
                       <div className="d-flex justify-content-between align-items-center">
                         <div>
@@ -117,7 +121,7 @@ useEffect(() => {
                           <small className="text-muted">
                             {new Date(order.createdAt).toLocaleDateString(
                               "en-IN",
-                              { month: "short", day: "numeric" },
+                              { month: "short", day: "numeric" }
                             )}
                           </small>
                         </div>
@@ -132,8 +136,46 @@ useEffect(() => {
                       </div>
                     </Card.Header>
 
-                    {/* Body */}
                     <Card.Body>
+                      {/* 🚦 Order Tracker */}
+                      <div className="order-tracker">
+                        {steps.map((step, i) => {
+                          const icons = {
+                            received: "📦",
+                            preparing: "👨‍🍳",
+                            out_for_delivery: "🏍️",
+                            delivered: "✅",
+                          };
+
+                          return (
+                            <div
+                              key={step}
+                              className={`tracker-step ${
+                                i <= currentStep ? "active" : ""
+                              }`}
+                            >
+                              <div className="tracker-icon">
+                                {icons[step]}
+                              </div>
+                              {i < 3 && (
+                                <div
+                                  className={`tracker-line ${
+                                    i < currentStep ? "active" : ""
+                                  }`}
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* ETA */}
+                      {order.status !== "delivered" && (
+                        <div className="eta-box">
+                          ⏳ {getETA(order.createdTime, order.status)}
+                        </div>
+                      )}
+
                       {/* Delivery Info */}
                       <div className="mb-3 p-2 bg-light rounded">
                         <small className="fw-bold">
@@ -145,7 +187,7 @@ useEffect(() => {
                         </small>
                       </div>
 
-                      {/* Items Summary */}
+                      {/* Items */}
                       <div className="mb-3">
                         <small className="fw-bold d-block mb-2">
                           🍽️ Items ({order.items?.length || 0})

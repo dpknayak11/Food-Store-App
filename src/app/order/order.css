@@ -1,41 +1,62 @@
-/* Order Page - Minimal Animations */
-
-/* Card Fade In Animation */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Tracker */
+.order-tracker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.order-card-animate {
-  animation: slideUp 0.5s ease-out;
+.tracker-step {
+  display: flex;
+  align-items: center;
 }
 
-/* Status Emoji Animation */
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+.tracker-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
-.status-emoji {
-  display: inline-block;
-  font-size: 1.2em;
+.tracker-step.active .tracker-icon {
+  background: #0d6efd;
+  color: white;
 }
 
-.status-emoji.status-preparing {
-  animation: pulse 1.5s ease-in-out infinite;
+.tracker-line {
+  width: 35px;
+  height: 4px;
+  background: #dee2e6;
+  margin: 0 4px;
 }
 
+.tracker-line.active {
+  background: #0d6efd;
+}
+
+.eta-box {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: #fff3e0;
+  color: #ff5722;
+  padding: 6px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+/* Bike movement */
 .status-emoji.status-out_for_delivery {
-  animation: slideLeft 1.5s ease-in-out infinite;
+  animation: ride 1.2s ease-in-out infinite;
 }
 
-@keyframes slideLeft {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(5px); }
+@keyframes ride {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
 }
