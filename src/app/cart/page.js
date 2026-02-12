@@ -15,7 +15,6 @@ import {
 } from "@/redux/slices/cartSlice";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
-
 export default function CartPage() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ export default function CartPage() {
   const [selectedAddressId, setSelectedAddressId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isCOD, setIsCOD] = useState(false);
-  
+
   // Dynamically load Razorpay script if not already loaded
   useEffect(() => {
     if (!window.Razorpay) {
@@ -36,7 +35,6 @@ export default function CartPage() {
       document.body.appendChild(script);
     }
   }, []);
-  
 
   useEffect(() => {
     // if (!cart || cart.length === 0) {
@@ -53,7 +51,6 @@ export default function CartPage() {
       setSelectedAddressId(address[0]._id); // default first (already sorted)
     }
   }, [address]);
-
 
   const selectedAddress = address?.find((a) => a._id === selectedAddressId);
 
@@ -132,128 +129,126 @@ export default function CartPage() {
   //   }
   // };
 
-
   const checkout = async () => {
-  if (!selectedAddress) {
-    toast.error("Please select a delivery address before checkout.");
-    return;
-  }
+    if (!selectedAddress) {
+      toast.error("Please select a delivery address before checkout.");
+      return;
+    }
 
-  try {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    // 🔹 Calculate totals
-    const subtotal = calculateTotal();
-    const deliveryFee = subtotal >= 500 ? 0 : 40;
-    const total = subtotal + deliveryFee;
+      // 🔹 Calculate totals
+      const subtotal = calculateTotal();
+      const deliveryFee = subtotal >= 500 ? 0 : 40;
+      const total = subtotal + deliveryFee;
 
-    // 🔹 Common Order Payload
-    const orderPayload = {
-      items: cart.map((item) => ({
-        menuItem: item._id,
-        name: item.name,
-        price: item.price,
-        quantity: item.qty,
-        ...(item.notes && { notes: item.notes }),
-      })),
-      deliveryInfo: {
-        name: user?.name || selectedAddress.name || "Guest",
-        phone: selectedAddress.phone,
-        address: selectedAddress.fullAddress,
-        ...(selectedAddress.notes && { notes: selectedAddress.notes }),
-      },
-      subtotal,
-      deliveryFee,
-      total,
-    };
+      // 🔹 Common Order Payload
+      const orderPayload = {
+        items: cart.map((item) => ({
+          menuItem: item._id,
+          name: item.name,
+          price: item.price,
+          quantity: item.qty,
+          ...(item.notes && { notes: item.notes }),
+        })),
+        deliveryInfo: {
+          name: user?.name || selectedAddress.name || "Guest",
+          phone: selectedAddress.phone,
+          address: selectedAddress.fullAddress,
+          ...(selectedAddress.notes && { notes: selectedAddress.notes }),
+        },
+        subtotal,
+        deliveryFee,
+        total,
+      };
 
-    // =====================================================
-    // 🟢 COD FLOW
-    // =====================================================
-    if (isCOD) {
-      const res = await httpPost("/order/create", orderPayload);
-      if (res.success) {
-        toast.success("Order placed successfully!");
-        dispatch(clearCart());
-        router.push("/order");
-      } else {
-        toast.error(res.message || "Failed to place order.");
+      // =====================================================
+      // 🟢 COD FLOW
+      // =====================================================
+      if (isCOD) {
+        const res = await httpPost("/order/create", orderPayload);
+        if (res.success) {
+          toast.success("Order placed successfully!");
+          dispatch(clearCart());
+          router.push("/order");
+        } else {
+          toast.error(res.message || "Failed to place order.");
+        }
+
+        setIsLoading(false);
+        return;
       }
 
-      setIsLoading(false);
-      return;
-    }
+      // =====================================================
+      // 🔵 ONLINE PAYMENT FLOW
+      // =====================================================
 
-    // =====================================================
-    // 🔵 ONLINE PAYMENT FLOW
-    // =====================================================
+      // 1️⃣ Create Razorpay Order
+      const checkoutRes = await httpPost("/order/checkout", {
+        amount: total,
+      });
 
-    // 1️⃣ Create Razorpay Order
-    const checkoutRes = await httpPost("/order/checkout", {
-      amount: total,
-    });
-
-    if (!checkoutRes?.success) {
-      toast.error("Unable to initiate payment");
-      setIsLoading(false);
-      return;
-    }
-    const keyValue = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID
-    const razorpayOrder = checkoutRes.data;
-    const options = {
-      key: keyValue,
-      // key: "rzp_test_tBdulQSfLPItgo",
-      amount: razorpayOrder.amount,
-      currency: "INR",
-      order_id: razorpayOrder.id,
-      prefill: {
-        name: user?.name || "",
-        email: user?.email || "",
-        contact: user?.phone || selectedAddress.phone || "",
-      },
-      handler: async function (response) {
-        try {
-          const verifyRes = await httpPost("/order/paymentverification", {
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-            orderData: orderPayload,
-          });
-          if (verifyRes?.success) {
-            toast.success("Payment successful!");
-            dispatch(clearCart());
-            router.push("/order");
-          } else {
-            toast.error(
-              verifyRes?.message || "Payment verification failed"
-            );
-          }
-        } catch (err) {
-          toast.error("Payment verification error");
-        } finally {
-          setIsLoading(false);
-        }
-      },
-      modal: {
-        ondismiss: () => {
-          setIsLoading(false);
-          toast.info("Payment cancelled");
+      if (!checkoutRes?.success) {
+        toast.error("Unable to initiate payment");
+        setIsLoading(false);
+        return;
+      }
+      const keyValue = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+      const razorpayOrder = checkoutRes.data;
+      const options = {
+        key: keyValue,
+        amount: razorpayOrder.amount,
+        currency: "INR",
+        order_id: razorpayOrder.id,
+        image: "https://i.ibb.co/gbJnjstc/dp2.jpg",
+        name: "Food Store",
+        description: "Secure Online Payment",
+        prefill: {
+          name: user?.name || "",
+          email: user?.email || "",
+          contact: user?.phone || selectedAddress.phone || "",
         },
-      },
-      theme: {
-        color: "#0d6efd",
-      },
-    };
+        handler: async function (response) {
+          try {
+            const verifyRes = await httpPost("/order/paymentverification", {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              orderData: orderPayload,
+            });
+            if (verifyRes?.success) {
+              toast.success("Payment successful!");
+              dispatch(clearCart());
+              router.push("/order");
+            } else {
+              toast.error(verifyRes?.message || "Payment verification failed");
+            }
+          } catch (err) {
+            toast.error("Payment verification error");
+          } finally {
+            setIsLoading(false);
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            setIsLoading(false);
+            toast.info("Payment cancelled");
+          },
+        },
+        theme: {
+          color: "#0d6efd",
+        },
+      };
 
-    const razor = new window.Razorpay(options);
-    razor.open();
-
-  } catch (error) {
-    console.error("Checkout Error:", error);
-    toast.error("Checkout failed. Please try again.");
-    setIsLoading(false);
-  }
-};
+      const razor = new window.Razorpay(options);
+      razor.open();
+    } catch (error) {
+      console.error("Checkout Error:", error);
+      toast.error("Checkout failed. Please try again.");
+      setIsLoading(false);
+    }
+  };
 
   if (!cart || cart.length === 0) {
     return (
@@ -285,16 +280,14 @@ export default function CartPage() {
             </div>
           </div>
         </Container>
-     </ProtectedRoute>
-
+      </ProtectedRoute>
     );
   }
 
   const totalPrice = calculateTotal();
 
   return (
-      <ProtectedRoute>
-
+    <ProtectedRoute>
       <Navbar />
       <Container className="mt-5 mb-5">
         <h2 className="mb-4" style={{ color: "#1C1C1C", fontWeight: "700" }}>
@@ -604,7 +597,7 @@ export default function CartPage() {
                   <div className="d-flex justify-content-between mb-3">
                     <span style={{ color: "#696969" }}>Delivery Fee</span>
                     <span style={{ fontWeight: "600", color: "#27AE60" }}>
-                     {totalPrice >= 500 ? "FREE" : "₹ 40"}
+                      {totalPrice >= 500 ? "FREE" : "₹ 40"}
                     </span>
                   </div>
                   <div
@@ -632,17 +625,20 @@ export default function CartPage() {
                         color: "#E74C3C",
                       }}
                     >
-                      {/* ₹ {totalPrice.toFixed(2)} */}
-                      ₹ {(totalPrice >= 500 ? totalPrice : totalPrice + 40).toFixed(2)}
-
+                      {/* ₹ {totalPrice.toFixed(2)} */}₹{" "}
+                      {(totalPrice >= 500
+                        ? totalPrice
+                        : totalPrice + 40
+                      ).toFixed(2)}
                     </span>
                   </div>
                 </div>
 
-
                 {/* Payment Method Selection */}
                 <div className="mb-3">
-                  <Form.Label style={{ fontWeight: 600 }}>Select Payment Method</Form.Label>
+                  <Form.Label style={{ fontWeight: 600 }}>
+                    Select Payment Method
+                  </Form.Label>
                   <div className="d-flex gap-3">
                     <Form.Check
                       type="radio"
