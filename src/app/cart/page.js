@@ -639,6 +639,30 @@ export default function CartPage() {
                   </div>
                 </div>
 
+
+                {/* Payment Method Selection */}
+                <div className="mb-3">
+                  <Form.Label style={{ fontWeight: 600 }}>Select Payment Method</Form.Label>
+                  <div className="d-flex gap-3">
+                    <Form.Check
+                      type="radio"
+                      id="cod-radio"
+                      label="Cash on Delivery (COD)"
+                      name="paymentMethod"
+                      checked={isCOD}
+                      onChange={() => setIsCOD(true)}
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="online-radio"
+                      label="Online Payment"
+                      name="paymentMethod"
+                      checked={!isCOD}
+                      onChange={() => setIsCOD(false)}
+                    />
+                  </div>
+                </div>
+
                 {/* Checkout Button */}
                 <Button
                   variant="primary"
