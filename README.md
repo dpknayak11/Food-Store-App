@@ -1,6 +1,6 @@
-Food Ordering Web Application
+Foodies Hub Ordering Web Application
 
-A modern and scalable Food Ordering Web Application built using Next.js
+A modern and scalable Foodies Hub Ordering Web Application built using Next.js
 (App Router), React, and Redux Toolkit. This application allows users
 to browse food items, add to cart, manage addresses, and place orders
 with a smooth and responsive UI.
