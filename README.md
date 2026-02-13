@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Food Ordering Web Application
 
-## Getting Started
+A modern and scalable Food Ordering Web Application built using Next.js
+(App Router), React, and Redux Toolkit. This application allows users
+to browse food items, add to cart, manage addresses, and place orders
+with a smooth and responsive UI.
 
-First, run the development server:
+------------------------------------------------------------------------
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Frontend: Next.js 16, React State Management: Redux Toolkit Styling:
+Bootstrap 5 HTTP Client: Axios Notifications: React Toastify Date
+Handling: Moment.js Linting: ESLint
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+------------------------------------------------------------------------
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Features
 
-## Learn More
+-   User Authentication (Login System)
+-   Protected Routes
+-   Add to Cart / Remove from Cart
+-   Order Placement Flow
+-   Profile Management
+-   Address Management
+-   Toast Notifications
+-   Loading Indicators
+-   Fully Responsive Design
 
-To learn more about Next.js, take a look at the following resources:
+------------------------------------------------------------------------
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  Clone the repository: git clone cd project-folder
 
-## Deploy on Vercel
+2.  Install dependencies: npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3.  Create environment file (.env):
+    NEXT_PUBLIC_API_URL=your_backend_api_url
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+------------------------------------------------------------------------
+
+Run the Project
+
+Development Mode: npm run dev
+
+Open in browser: http://localhost:3000
+
+Production Build: npm run build npm run start
+
+------------------------------------------------------------------------
+
+State Management
+
+Redux Toolkit is used for global state management.
+
+Included Slices: - authSlice - cartSlice - menuSlice - addressSlice
+
+------------------------------------------------------------------------
+
+Author
+
+Deepak Nayak Full Stack MERN Developer
+
+📂 Project Structure:
+
+src/
+│
+├── app/                  # Next.js App Router Pages
+│   ├── cart/
+│   ├── login/
+│   ├── order/
+│   ├── profile/
+│   ├── layout.js
+│   └── page.js
+│
+├── components/           # Reusable Components
+│   ├── Navbar.js
+│   ├── Footer.js
+│   ├── ItemCard.js
+│   ├── ProtectedRoute.js
+│   └── ...
+│
+├── redux/                # Redux Store & Slices
+│   ├── store.js
+│   ├── ReduxProvider.js
+│   └── slices/
+│       ├── authSlice.js
+│       ├── cartSlice.js
+│       ├── menuSlice.js
+│       └── addressSlice.js
+│
+├── services/             # API & Config
+│   ├── api.js
+│   ├── auth.js
+│   └── config.js
+│
+└── styles/               # Custom CSS
+
