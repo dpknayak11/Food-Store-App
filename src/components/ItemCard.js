@@ -43,12 +43,20 @@ function ItemCard({ data = [] }) {
                 backdropFilter: "blur(6px)",
               }}
             >
+              {/* <Card.Img
+                variant="top"
+                src={item.image} // foodImage.png
+                style={{ height: "200px", objectFit: "cover" }}
+              /> */}
               <Card.Img
                 variant="top"
-                src={item.image}
+                src={item.image || "/Image/foodImage.png"}
                 style={{ height: "200px", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/Image/foodImage.png";
+                }}
               />
-
               <Card.Body className="d-flex flex-column">
                 <Card.Title className="fw-semibold">{item.name}</Card.Title>
 

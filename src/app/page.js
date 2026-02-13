@@ -10,46 +10,25 @@ import HorizontalMenuCategory from "@/components/HorizontalMenuCategory";
 import ItemCard from "@/components/ItemCard";
 import { Button } from "react-bootstrap";
 import GrowSpinner from "@/components/GrowSpinner";
+import Prodect from "../../public/Prodect/item.json";
+
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const { menu, loading } = useSelector((state) => state.menu);
-  const cart = useSelector((state) => state.cart?.items);
-  console.log("cart", cart);
+  // const dispatch = useDispatch();
+  // const { menu, loading } = useSelector((state) => state.menu);
+  // const cart = useSelector((state) => state.cart?.items);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [pageLoading, setPageLoading] = useState(true);
-  const fetchRef = useRef(false);
-
+  // const fetchRef = useRef(false);
+  // console.log("Prodect",Prodect);
+  
   const onCategorySelect = (category) => {
     setSelectedCategory(category);
   };
   // console.log("loading", loading);
 
-  const handleSubmit = async () => {
-    try {
-      setIsLoading(true);
-      const res = await httpPost("/menu");
-
-      if (!res.error) {
-        dispatch(setMenu(res.data));
-      } else {
-        toast.error(res.message || "Something went wrong");
-      }
-    } catch (err) {
-      toast.error("Server error");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!fetchRef.current && menu?.length === 0) {
-      fetchRef.current = true;
-      handleSubmit();
-    }
-  }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       setPageLoading(false);
@@ -64,8 +43,8 @@ export default function Home() {
 
   let filteredMenu =
     selectedCategory !== ""
-      ? menu.filter((item) => item.category === selectedCategory)
-      : menu;
+      ? Prodect.filter((item) => item.category === selectedCategory)
+      : Prodect;
 
   return (
     <>
@@ -88,9 +67,9 @@ export default function Home() {
       <div className="container mt-2">
         <div className="mb-4">
           <h2 className="mb-3">🍽️ Explore Menu</h2>
-          {menu?.length > 0 && (
+          {Prodect?.length > 0 && (
             <HorizontalMenuCategory
-              data={menu}
+              data={Prodect}
               onCategorySelect={onCategorySelect}
               selectedCategory={selectedCategory}
             />

@@ -316,13 +316,17 @@ export default function CartPage() {
                     {/* Item Image */}
                     <div style={{ flex: "0 0 140px" }}>
                       <img
-                        src={item.image}
+                        src={item.image || "/Image/foodImage.png"} // null/empty handle
                         alt={item.name}
                         style={{
                           width: "100%",
                           height: "140px",
                           objectFit: "cover",
                           borderRadius: "10px",
+                        }}
+                        onError={(e) => {
+                          e.target.onerror = null; // prevent infinite loop
+                          e.target.src = "/Image/foodImage.png"; // fallback image
                         }}
                       />
                     </div>

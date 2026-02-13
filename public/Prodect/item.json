@@ -1,0 +1,902 @@
+[
+  {
+    "_id": 1,
+    "name": "Margherita Pizza",
+    "description": "Classic Italian pizza with mozzarella and basil",
+    "price": 199,
+    "image": "https://images.unsplash.com/photo-1601924582975-7e87e7d9f9e0?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 2,
+    "name": "Pepperoni Pizza",
+    "description": "Loaded with spicy pepperoni slices",
+    "price": 299,
+    "image": "https://images.unsplash.com/photo-1548365328-9f547fb0953d?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 3,
+    "name": "Veggie Supreme Pizza",
+    "description": "Topped with olives, capsicum and onions",
+    "price": 259,
+    "image": "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 4,
+    "name": "BBQ Chicken Pizza",
+    "description": "Grilled chicken with tangy BBQ sauce",
+    "price": 329,
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 5,
+    "name": "Four Cheese Pizza",
+    "description": "Blend of mozzarella, parmesan, gouda and cheddar",
+    "price": 349,
+    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 6,
+    "name": "Hawaiian Pizza",
+    "description": "Ham and pineapple tropical delight",
+    "price": 279,
+    "image": "https://images.unsplash.com/photo-1566843972143-a6a3ec1bdcb1?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 7,
+    "name": "Mushroom Truffle Pizza",
+    "description": "Wild mushrooms with truffle oil",
+    "price": 389,
+    "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 8,
+    "name": "Spicy Arrabiata Pizza",
+    "description": "Spicy tomato sauce with jalapenos",
+    "price": 269,
+    "image": "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80",
+    "category": "PIZZA",
+    "icon": "🍕"
+  },
+  {
+    "_id": 9,
+    "name": "Classic Veg Burger",
+    "description": "Crispy patty with lettuce and tomato",
+    "price": 99,
+    "image": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 10,
+    "name": "Cheese Burger",
+    "description": "Juicy patty with melted cheddar",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 11,
+    "name": "Bacon Double Cheeseburger",
+    "description": "Two beef patties with crispy bacon",
+    "price": 249,
+    "image": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 12,
+    "name": "Grilled Chicken Burger",
+    "description": "Grilled chicken breast with herbs",
+    "price": 179,
+    "image": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 13,
+    "name": "Spicy Paneer Burger",
+    "description": "Indian cottage cheese with spices",
+    "price": 149,
+    "image": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 14,
+    "name": "Mushroom Swiss Burger",
+    "description": "Sauteed mushrooms with swiss cheese",
+    "price": 199,
+    "image": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 15,
+    "name": "Vegan Black Bean Burger",
+    "description": "Plant-based patty with avocado",
+    "price": 169,
+    "image": "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 16,
+    "name": "Crispy Chicken Burger",
+    "description": "Crunchy fried chicken fillet",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80",
+    "category": "BURGER",
+    "icon": "🍔"
+  },
+  {
+    "_id": 17,
+    "name": "White Sauce Pasta",
+    "description": "Creamy Alfredo pasta",
+    "price": 189,
+    "image": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80",
+    "category": "PASTA",
+    "icon": "🍝"
+  },
+  {
+    "_id": 18,
+    "name": "Red Sauce Pasta",
+    "description": "Classic tomato basil pasta",
+    "price": 179,
+    "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=800&q=80",
+    "category": "PASTA",
+    "icon": "🍝"
+  },
+  {
+    "_id": 19,
+    "name": "Pink Sauce Pasta",
+    "description": "Blend of white and red sauce",
+    "price": 199,
+    "image": "https://images.unsplash.com/photo-1556761223-4c4282c73f77?auto=format&fit=crop&w=800&q=80",
+    "category": "PASTA",
+    "icon": "🍝"
+  },
+  {
+    "_id": 20,
+    "name": "Pesto Pasta",
+    "description": "Fresh basil pesto with pine nuts",
+    "price": 219,
+    "image": "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=800&q=80",
+    "category": "PASTA",
+    "icon": "🍝"
+  },
+  {
+    "_id": 21,
+    "name": "Seafood Pasta",
+    "description": "Mixed seafood in garlic white wine",
+    "price": 349,
+    "image": "https://images.unsplash.com/photo-1555949251-1ad636a598ca?auto=format&fit=crop&w=800&q=80",
+    "category": "PASTA",
+    "icon": "🍝"
+  },
+  {
+    "_id": 22,
+    "name": "Baked Mac and Cheese",
+    "description": "Creamy baked macaroni with cheese crust",
+    "price": 209,
+    "image": "https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?auto=format&fit=crop&w=800&q=80",
+    "category": "PASTA",
+    "icon": "🍝"
+  },
+  {
+    "_id": 23,
+    "name": "Club Sandwich",
+    "description": "Triple layered grilled sandwich",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?auto=format&fit=crop&w=800&q=80",
+    "category": "SANDWICH",
+    "icon": "🥪"
+  },
+  {
+    "_id": 24,
+    "name": "Grilled Cheese Sandwich",
+    "description": "Toasted bread with melted cheese",
+    "price": 89,
+    "image": "https://images.unsplash.com/photo-1528736235302-52922df5c122?auto=format&fit=crop&w=800&q=80",
+    "category": "SANDWICH",
+    "icon": "🥪"
+  },
+  {
+    "_id": 25,
+    "name": "Chicken Tikka Sandwich",
+    "description": "Spicy grilled chicken with mint chutney",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1624373838492-30c725b22216?auto=format&fit=crop&w=800&q=80",
+    "category": "SANDWICH",
+    "icon": "🥪"
+  },
+  {
+    "_id": 26,
+    "name": "Veggie Delight Sandwich",
+    "description": "Fresh vegetables and hummus",
+    "price": 109,
+    "image": "https://images.unsplash.com/photo-1540914124281-342587941389?auto=format&fit=crop&w=800&q=80",
+    "category": "SANDWICH",
+    "icon": "🥪"
+  },
+  {
+    "_id": 27,
+    "name": "French Fries",
+    "description": "Crispy salted fries",
+    "price": 69,
+    "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80",
+    "category": "FRIES",
+    "icon": "🍟"
+  },
+  {
+    "_id": 28,
+    "name": "Peri Peri Fries",
+    "description": "Spicy peri peri seasoning",
+    "price": 89,
+    "image": "https://images.unsplash.com/photo-1598731411709-7dc5094720d3?auto=format&fit=crop&w=800&q=80",
+    "category": "FRIES",
+    "icon": "🍟"
+  },
+  {
+    "_id": 29,
+    "name": "Cheese Fries",
+    "description": "Loaded with melted cheese sauce",
+    "price": 119,
+    "image": "https://images.unsplash.com/photo-1585109649138-04535e5d9ce0?auto=format&fit=crop&w=800&q=80",
+    "category": "FRIES",
+    "icon": "🍟"
+  },
+  {
+    "_id": 30,
+    "name": "Sweet Potato Fries",
+    "description": "Baked sweet potato wedges",
+    "price": 99,
+    "image": "https://images.unsplash.com/photo-1543352634-99a5d50ae78e?auto=format&fit=crop&w=800&q=80",
+    "category": "FRIES",
+    "icon": "🍟"
+  },
+  {
+    "_id": 31,
+    "name": "Cold Coffee",
+    "description": "Creamy chilled coffee",
+    "price": 99,
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
+    "category": "DRINKS",
+    "icon": "🥤"
+  },
+  {
+    "_id": 32,
+    "name": "Mango Smoothie",
+    "description": "Fresh mango blended with yogurt",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&fit=crop&w=800&q=80",
+    "category": "DRINKS",
+    "icon": "🥤"
+  },
+  {
+    "_id": 33,
+    "name": "Fresh Lime Soda",
+    "description": "Sparkling lime with mint",
+    "price": 59,
+    "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
+    "category": "DRINKS",
+    "icon": "🥤"
+  },
+  {
+    "_id": 34,
+    "name": "Strawberry Shake",
+    "description": "Fresh strawberry milkshake",
+    "price": 119,
+    "image": "https://images.unsplash.com/photo-1553787434-dd9eb88c6a84?auto=format&fit=crop&w=800&q=80",
+    "category": "DRINKS",
+    "icon": "🥤"
+  },
+  {
+    "_id": 35,
+    "name": "Iced Tea",
+    "description": "Lemon iced tea",
+    "price": 69,
+    "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80",
+    "category": "DRINKS",
+    "icon": "🥤"
+  },
+  {
+    "_id": 36,
+    "name": "Oreo Shake",
+    "description": "Cookies and cream milkshake",
+    "price": 139,
+    "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+    "category": "DRINKS",
+    "icon": "🥤"
+  },
+  {
+    "_id": 37,
+    "name": "Chocolate Brownie",
+    "description": "Warm chocolate brownie dessert",
+    "price": 109,
+    "image": "https://images.unsplash.com/photo-1601972599720-b3a4d9d9f63c?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍰"
+  },
+  {
+    "_id": 38,
+    "name": "Tiramisu",
+    "description": "Classic Italian coffee dessert",
+    "price": 189,
+    "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍰"
+  },
+  {
+    "_id": 39,
+    "name": "Cheesecake",
+    "description": "New York style baked cheesecake",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍰"
+  },
+  {
+    "_id": 40,
+    "name": "Molten Lava Cake",
+    "description": "Chocolate cake with gooey center",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍰"
+  },
+  {
+    "_id": 41,
+    "name": "Gulab Jamun",
+    "description": "Fried milk solids in sugar syrup",
+    "price": 89,
+    "image": "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍰"
+  },
+  {
+    "_id": 42,
+    "name": "Butter Chicken",
+    "description": "Rich creamy tomato chicken curry",
+    "price": 249,
+    "image": "https://images.unsplash.com/photo-1604908177522-402c3e6a6d2a?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🍛"
+  },
+  {
+    "_id": 43,
+    "name": "Veg Biryani",
+    "description": "Fragrant basmati rice with vegetables",
+    "price": 199,
+    "image": "https://images.unsplash.com/photo-1589308078054-8321c8bfb0f5?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🍛"
+  },
+  {
+    "_id": 44,
+    "name": "Chicken Biryani",
+    "description": "Spiced rice with tender chicken",
+    "price": 249,
+    "image": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🍛"
+  },
+  {
+    "_id": 45,
+    "name": "Palak Paneer",
+    "description": "Cottage cheese in spinach gravy",
+    "price": 179,
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🍛"
+  },
+  {
+    "_id": 46,
+    "name": "Dal Makhani",
+    "description": "Creamy black lentils",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🍛"
+  },
+  {
+    "_id": 47,
+    "name": "Tandoori Chicken",
+    "description": "Spiced yogurt grilled chicken",
+    "price": 279,
+    "image": "https://images.unsplash.com/photo-1626647420815-c93b113b9ed4?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🍛"
+  },
+  {
+    "_id": 48,
+    "name": "Chicken Shawarma",
+    "description": "Middle eastern spiced chicken wrap",
+    "price": 149,
+    "image": "https://images.unsplash.com/photo-1599488615731-7e5c2823e2e0?auto=format&fit=crop&w=800&q=80",
+    "category": "WRAPS",
+    "icon": "🌯"
+  },
+  {
+    "_id": 49,
+    "name": "Paneer Kathi Roll",
+    "description": "Indian cottage cheese wrap",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80",
+    "category": "WRAPS",
+    "icon": "🌯"
+  },
+  {
+    "_id": 50,
+    "name": "Falafel Wrap",
+    "description": "Chickpea patties with tahini",
+    "price": 139,
+    "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=800&q=80",
+    "category": "WRAPS",
+    "icon": "🌯"
+  },
+  {
+    "_id": 51,
+    "name": "Caesar Salad",
+    "description": "Romaine lettuce with Caesar dressing",
+    "price": 149,
+    "image": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=800&q=80",
+    "category": "SALADS",
+    "icon": "🥗"
+  },
+  {
+    "_id": 52,
+    "name": "Greek Salad",
+    "description": "Feta cheese, olives and cucumbers",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80",
+    "category": "SALADS",
+    "icon": "🥗"
+  },
+  {
+    "_id": 53,
+    "name": "Chicken Tikka Salad",
+    "description": "Grilled chicken with mixed greens",
+    "price": 189,
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
+    "category": "SALADS",
+    "icon": "🥗"
+  },
+  {
+    "_id": 54,
+    "name": "Onion Rings",
+    "description": "Crispy beer battered rings",
+    "price": 89,
+    "image": "https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🍩"
+  },
+  {
+    "_id": 55,
+    "name": "Mozzarella Sticks",
+    "description": "Fried cheese sticks with marinara",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1531749668029-2db88e4276be?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🧀"
+  },
+  {
+    "_id": 56,
+    "name": "Chicken Wings",
+    "description": "Spicy buffalo wings",
+    "price": 199,
+    "image": "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🍗"
+  },
+  {
+    "_id": 57,
+    "name": "Spring Rolls",
+    "description": "Crispy vegetable rolls",
+    "price": 109,
+    "image": "https://images.unsplash.com/photo-1623131362389-92c03f50b97b?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🥠"
+  },
+  {
+    "_id": 58,
+    "name": "Sushi Platter",
+    "description": "Assorted Japanese sushi",
+    "price": 399,
+    "image": "https://images.unsplash.com/photo-1617196035154-1e7e6e28b0db?auto=format&fit=crop&w=800&q=80",
+    "category": "JAPANESE",
+    "icon": "🍣"
+  },
+  {
+    "_id": 59,
+    "name": "Chicken Ramen",
+    "description": "Japanese noodle soup",
+    "price": 229,
+    "image": "https://images.unsplash.com/photo-1617090667340-73af5dcb6e4c?auto=format&fit=crop&w=800&q=80",
+    "category": "JAPANESE",
+    "icon": "🍜"
+  },
+  {
+    "_id": 60,
+    "name": "Pad Thai",
+    "description": "Thai style stir fried noodles",
+    "price": 209,
+    "image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?auto=format&fit=crop&w=800&q=80",
+    "category": "THAI",
+    "icon": "🍜"
+  },
+  {
+    "_id": 61,
+    "name": "Green Curry",
+    "description": "Spicy Thai green curry with coconut",
+    "price": 239,
+    "image": "https://images.unsplash.com/photo-1551326844-4df70f78d0e9?auto=format&fit=crop&w=800&q=80",
+    "category": "THAI",
+    "icon": "🍛"
+  },
+  {
+    "_id": 62,
+    "name": "Tom Yum Soup",
+    "description": "Hot and sour Thai soup",
+    "price": 179,
+    "image": "https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?auto=format&fit=crop&w=800&q=80",
+    "category": "THAI",
+    "icon": "🥣"
+  },
+  {
+    "_id": 63,
+    "name": "Tacos al Pastor",
+    "description": "Mexican pork tacos",
+    "price": 189,
+    "image": "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&fit=crop&w=800&q=80",
+    "category": "MEXICAN",
+    "icon": "🌮"
+  },
+  {
+    "_id": 64,
+    "name": "Chicken Quesadilla",
+    "description": "Grilled tortilla with cheese and chicken",
+    "price": 199,
+    "image": "https://images.unsplash.com/photo-1618040996337-56904b7850b9?auto=format&fit=crop&w=800&q=80",
+    "category": "MEXICAN",
+    "icon": "🫓"
+  },
+  {
+    "_id": 65,
+    "name": "Nachos Supreme",
+    "description": "Loaded nachos with cheese and salsa",
+    "price": 209,
+    "image": "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=800&q=80",
+    "category": "MEXICAN",
+    "icon": "🫘"
+  },
+  {
+    "_id": 66,
+    "name": "Guacamole & Chips",
+    "description": "Fresh avocado dip with tortilla chips",
+    "price": 149,
+    "image": "https://images.unsplash.com/photo-1600335895229-6e75511892c8?auto=format&fit=crop&w=800&q=80",
+    "category": "MEXICAN",
+    "icon": "🥑"
+  },
+  {
+    "_id": 67,
+    "name": "Fish and Chips",
+    "description": "Beer battered cod with fries",
+    "price": 259,
+    "image": "https://images.unsplash.com/photo-1579212697818-1d7d5d34a972?auto=format&fit=crop&w=800&q=80",
+    "category": "SEAFOOD",
+    "icon": "🐟"
+  },
+  {
+    "_id": 68,
+    "name": "Grilled Salmon",
+    "description": "Fresh salmon with lemon butter",
+    "price": 349,
+    "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
+    "category": "SEAFOOD",
+    "icon": "🐟"
+  },
+  {
+    "_id": 69,
+    "name": "Prawn Tempura",
+    "description": "Lightly battered fried prawns",
+    "price": 279,
+    "image": "https://images.unsplash.com/photo-1617196034186-421b4917bafa?auto=format&fit=crop&w=800&q=80",
+    "category": "JAPANESE",
+    "icon": "🍤"
+  },
+  {
+    "_id": 70,
+    "name": "Chow Mein",
+    "description": "Stir fried noodles with vegetables",
+    "price": 169,
+    "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80",
+    "category": "CHINESE",
+    "icon": "🍜"
+  },
+  {
+    "_id": 71,
+    "name": "Manchurian",
+    "description": "Vegetable balls in spicy sauce",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1610011686768-8923f9e0991c?auto=format&fit=crop&w=800&q=80",
+    "category": "CHINESE",
+    "icon": "🥡"
+  },
+  {
+    "_id": 72,
+    "name": "Schezwan Fried Rice",
+    "description": "Spicy Indo-Chinese fried rice",
+    "price": 179,
+    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
+    "category": "CHINESE",
+    "icon": "🍚"
+  },
+  {
+    "_id": 73,
+    "name": "Dim Sums",
+    "description": "Steamed vegetable dumplings",
+    "price": 149,
+    "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+    "category": "CHINESE",
+    "icon": "🥟"
+  },
+  {
+    "_id": 74,
+    "name": "Masala Dosa",
+    "description": "Crispy rice crepe with potato filling",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80",
+    "category": "SOUTH INDIAN",
+    "icon": "🫓"
+  },
+  {
+    "_id": 75,
+    "name": "Idli Sambhar",
+    "description": "Steamed rice cakes with lentil soup",
+    "price": 99,
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80",
+    "category": "SOUTH INDIAN",
+    "icon": "🥣"
+  },
+  {
+    "_id": 76,
+    "name": "Uttapam",
+    "description": "Thick rice pancake with toppings",
+    "price": 119,
+    "image": "https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&w=800&q=80",
+    "category": "SOUTH INDIAN",
+    "icon": "🫓"
+  },
+  {
+    "_id": 77,
+    "name": "Paneer Tikka",
+    "description": "Grilled cottage cheese cubes",
+    "price": 189,
+    "image": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🧀"
+  },
+  {
+    "_id": 78,
+    "name": "Samosa",
+    "description": "Crispy pastry with spiced potato",
+    "price": 49,
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🥟"
+  },
+  {
+    "_id": 79,
+    "name": "Chole Bhature",
+    "description": "Spicy chickpeas with fried bread",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&w=800&q=80",
+    "category": "INDIAN",
+    "icon": "🍛"
+  },
+  {
+    "_id": 80,
+    "name": "Garlic Bread",
+    "description": "Toasted bread with garlic butter",
+    "price": 89,
+    "image": "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🍞"
+  },
+  {
+    "_id": 81,
+    "name": "Bruschetta",
+    "description": "Topped with tomatoes and basil",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🥖"
+  },
+  {
+    "_id": 82,
+    "name": "Hummus Platter",
+    "description": "Creamy chickpea dip with pita",
+    "price": 149,
+    "image": "https://images.unsplash.com/photo-1577805945777-1f4c5c6c6c6c?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🧆"
+  },
+  {
+    "_id": 83,
+    "name": "Chicken Nuggets",
+    "description": "Crispy bite-sized chicken",
+    "price": 119,
+    "image": "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80",
+    "category": "SNACKS",
+    "icon": "🍗"
+  },
+  {
+    "_id": 84,
+    "name": "Pancakes",
+    "description": "Fluffy pancakes with maple syrup",
+    "price": 139,
+    "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80",
+    "category": "BREAKFAST",
+    "icon": "🥞"
+  },
+  {
+    "_id": 85,
+    "name": "French Toast",
+    "description": "Egg-dipped bread with cinnamon",
+    "price": 119,
+    "image": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=800&q=80",
+    "category": "BREAKFAST",
+    "icon": "🍞"
+  },
+  {
+    "_id": 86,
+    "name": "English Breakfast",
+    "description": "Eggs, bacon, sausage, beans",
+    "price": 249,
+    "image": "https://images.unsplash.com/photo-1608039763432-9521e40d3be2?auto=format&fit=crop&w=800&q=80",
+    "category": "BREAKFAST",
+    "icon": "🍳"
+  },
+  {
+    "_id": 87,
+    "name": "Smoothie Bowl",
+    "description": "Acai bowl with fruits and granola",
+    "price": 179,
+    "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=800&q=80",
+    "category": "BREAKFAST",
+    "icon": "🥣"
+  },
+  {
+    "_id": 88,
+    "name": "Croissant",
+    "description": "Buttery flaky pastry",
+    "price": 79,
+    "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80",
+    "category": "BAKERY",
+    "icon": "🥐"
+  },
+  {
+    "_id": 89,
+    "name": "Blueberry Muffin",
+    "description": "Fresh baked blueberry muffin",
+    "price": 69,
+    "image": "https://images.unsplash.com/photo-1558401391-7899b4bd5bbf?auto=format&fit=crop&w=800&q=80",
+    "category": "BAKERY",
+    "icon": "🧁"
+  },
+  {
+    "_id": 90,
+    "name": "Chocolate Donut",
+    "description": "Glazed chocolate donut",
+    "price": 59,
+    "image": "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80",
+    "category": "BAKERY",
+    "icon": "🍩"
+  },
+  {
+    "_id": 91,
+    "name": "Cinnamon Roll",
+    "description": "Sweet cinnamon swirl with icing",
+    "price": 89,
+    "image": "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=800&q=80",
+    "category": "BAKERY",
+    "icon": "🥨"
+  },
+  {
+    "_id": 92,
+    "name": "Vanilla Cupcake",
+    "description": "Vanilla sponge with buttercream",
+    "price": 79,
+    "image": "https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=800&q=80",
+    "category": "BAKERY",
+    "icon": "🧁"
+  },
+  {
+    "_id": 93,
+    "name": "Red Velvet Cake",
+    "description": "Classic red velvet slice",
+    "price": 129,
+    "image": "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍰"
+  },
+  {
+    "_id": 94,
+    "name": "Mango Sticky Rice",
+    "description": "Thai dessert with coconut milk",
+    "price": 139,
+    "image": "https://images.unsplash.com/photo-1621303837174-89787a7e4729?auto=format&fit=crop&w=800&q=80",
+    "category": "THAI",
+    "icon": "🍚"
+  },
+  {
+    "_id": 95,
+    "name": "Ice Cream Sundae",
+    "description": "Vanilla ice cream with chocolate sauce",
+    "price": 109,
+    "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍨"
+  },
+  {
+    "_id": 96,
+    "name": "Falooda",
+    "description": "Indian rose dessert drink",
+    "price": 119,
+    "image": "https://images.unsplash.com/photo-1632812147512-5d8e13e9cbd3?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🥤"
+  },
+  {
+    "_id": 97,
+    "name": "Lemon Tart",
+    "description": "Tangy lemon curd in pastry",
+    "price": 99,
+    "image": "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🥧"
+  },
+  {
+    "_id": 98,
+    "name": "Chicken Fried Rice",
+    "description": "Egg fried rice with chicken",
+    "price": 179,
+    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
+    "category": "CHINESE",
+    "icon": "🍚"
+  },
+  {
+    "_id": 99,
+    "name": "Hakka Noodles",
+    "description": "Indo-Chinese style noodles",
+    "price": 159,
+    "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80",
+    "category": "CHINESE",
+    "icon": "🍜"
+  },
+  {
+    "_id": 100,
+    "name": "Chocolate Mousse",
+    "description": "Rich and creamy chocolate dessert",
+    "price": 119,
+    "image": "https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=800&q=80",
+    "category": "DESSERTS",
+    "icon": "🍮"
+  }
+]

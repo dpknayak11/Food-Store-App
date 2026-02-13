@@ -71,23 +71,6 @@ import { useState, useMemo } from "react";
 import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
 
-// 🍽️ Smart Icon Finder
-const getCategoryIcon = (category = "") => {
-  const name = category.toUpperCase();
-
-  if (name.includes("BURGER")) return "🍔";
-  if (name.includes("PIZZA")) return "🍕";
-  if (name.includes("DRINK")) return "🥤";
-  if (name.includes("DESSERT") || name.includes("SWEET")) return "🍰";
-  if (name.includes("BIRYANI") || name.includes("RICE")) return "🍛";
-  if (name.includes("CHINESE") || name.includes("NOODLE")) return "🥡";
-  if (name.includes("FRIES") || name.includes("SNACK")) return "🍟";
-  if (name.includes("PASTA")) return "🍝";
-  if (name.includes("SANDWICH") || name.includes("WRAP")) return "🥪";
-
-  return "🍽️"; // default
-};
-
 function HorizontalMenuCategory({ data = [], onCategorySelect, selectedCategory }) {
   const [showAll, setShowAll] = useState(false);
 
@@ -108,7 +91,7 @@ function HorizontalMenuCategory({ data = [], onCategorySelect, selectedCategory 
       <Stack direction="horizontal" gap={2} className="flex-wrap justify-content-center">
         {categories.map((item, index) => {
           const isActive = selectedCategory === item.category;
-          const icon = getCategoryIcon(item.category);
+          // const icon = getCategoryIcon(item.category);
 
           return (
             <div
@@ -127,7 +110,7 @@ function HorizontalMenuCategory({ data = [], onCategorySelect, selectedCategory 
                 transition: "all 0.2s ease",
               }}
             >
-              <div style={{ fontSize: "18px" }}>{icon}</div>
+              <div style={{ fontSize: "18px" }}>{item.icon}</div>
               <div style={{ fontSize: "11px", marginTop: "2px", fontWeight: 500 }}>
                 {item.category}
               </div>
