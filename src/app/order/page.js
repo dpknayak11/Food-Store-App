@@ -45,31 +45,56 @@ export default function OrderPage() {
     return now.diff(orderTime, "minutes") <= 30;
   };
 
+  // // 🔄 Auto refresh active recent orders every 2 mins
+  // useEffect(() => {
+  //   if (!orders.length) return;
+
+  //   const activeStatuses = [
+  //     "received",
+  //     "preparing",
+  //     "out_for_delivery",
+  //     "delivered",
+  //   ];
+
+  //   const shouldAutoRefresh = orders.some(
+  //     (order) =>
+  //       activeStatuses.includes(order.status) &&
+  //       isRecentOrder(order.createdTime)
+  //   );
+
+  //   if (!shouldAutoRefresh) return;
+
+  //   const interval = setInterval(() => {
+  //     fetchOrders();
+  //   }, 2 * 60 * 1000);
+
+  //   return () => clearInterval(interval);
+  // }, [orders]);
+
   // 🔄 Auto refresh active recent orders every 2 mins
-  useEffect(() => {
-    if (!orders.length) return;
+useEffect(() => {
+  const activeStatuses = [
+    "received",
+    "preparing",
+    "out_for_delivery",
+    "delivered",
+  ];
 
-    const activeStatuses = [
-      "received",
-      "preparing",
-      "out_for_delivery",
-      "delivered",
-    ];
-
+  const interval = setInterval(() => {
     const shouldAutoRefresh = orders.some(
       (order) =>
         activeStatuses.includes(order.status) &&
         isRecentOrder(order.createdTime)
     );
 
-    if (!shouldAutoRefresh) return;
-
-    const interval = setInterval(() => {
+    if (shouldAutoRefresh) {
       fetchOrders();
-    }, 2 * 60 * 1000);
+    }
+  }, 2 * 60 * 1000); // 2 min
 
-    return () => clearInterval(interval);
-  }, [orders]);
+  return () => clearInterval(interval);
+}, []); // ❗ empty dependency
+
 
   // ⏳ ETA calculator
   const getETA = (createdTime, status) => {
@@ -119,10 +144,11 @@ export default function OrderPage() {
                             Order #{order._id.slice(-6).toUpperCase()}
                           </p>
                           <small className="text-muted">
-                            {new Date(order.createdAt).toLocaleDateString(
+                            {order.createdTime}
+                            {/* {new Date(order.createdAt).toLocaleDateString(
                               "en-IN",
-                              { month: "short", day: "numeric" }
-                            )}
+                              { month: "short", day: "numeric",  }
+                            )} */}
                           </small>
                         </div>
                         <Badge bg={status.color} className="fs-6">
