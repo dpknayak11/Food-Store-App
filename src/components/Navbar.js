@@ -62,9 +62,14 @@ export default function RNavbar() {
   return (
     <Navbar expand="lg" className="px-3 py-2 navbar">
       <Container fluid>
-        {/* Left - App Name */}
+        {/* Left - App Logo */}
         <Navbar.Brand as={Link} href="/" className="navbar-brand">
-          🍔 FoodApp
+          <img
+            src="/Image/logo.jpg"
+            alt="App Logo"
+            style={{ width: 40, height: 40, objectFit: "cover", borderRadius: "50%" }}
+          />
+          {" "} Foodies Hub
         </Navbar.Brand>
         {token && (
           <Nav.Item className="ms-auto position-relative d-flex align-items-center">
